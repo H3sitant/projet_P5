@@ -5,10 +5,10 @@
 
 #include "pause.h"
 
-Pause::Pause(QWidget  *parent)
+Pause::Pause(FenetrePrincipale  *parent)
 	: fenetreTexte(new QPlainTextEdit), QWidget(parent)
 {
-	
+	this->parent = parent;
 	QVBoxLayout *layout = new QVBoxLayout();
 	reprendreP = new QPushButton("Reprendre");
 	instructionsP = new QPushButton("Instructions");
@@ -29,15 +29,19 @@ Pause::Pause(QWidget  *parent)
 
 
 void Pause::reprendre() {
+	parent->afficherJeu();
 	printf("reprendre");
 }
 void Pause::instructions() {
+	parent->afficherInstructions();
 	printf("instrcutions");
 }
 void Pause::rejouer() {
+	parent->demarrerNouvellePartie();
 	printf("rejouer");
 }
 void Pause::quitter() {
+	parent->afficherMenuPrincipal();
 	printf("quitter");
 }
 

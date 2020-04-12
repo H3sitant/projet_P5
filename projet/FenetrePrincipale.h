@@ -14,6 +14,8 @@ public:
 	void afficherJeu();
 	void afficherMenuPrincipal();
 	void afficherMenuPause();
+	void afficherInstructions();
+	void demarrerNouvellePartie();
 
 private:
 	QWidget *jeu;

@@ -1,10 +1,11 @@
 #include <QtWidgets>
+#include "FenetrePrincipale.h"
 
 class Pause : public QWidget {
 	Q_OBJECT
 
 public:
-	Pause(QWidget *parent=nullptr);
+	Pause(FenetrePrincipale *parent=nullptr);
 
 private slots:
 	void reprendre();
@@ -19,4 +20,5 @@ private:
 	QPushButton *rejouerP;
 	QPushButton *quitterP;
 	QPlainTextEdit *fenetreTexte;
+	FenetrePrincipale* parent;
 };

@@ -11,7 +11,6 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 	addWidget(jeu);
 	addWidget(menuPrincipal);
 	addWidget(menuPause);
-	setCurrentWidget(jeu);
 	setCurrentWidget(menuPrincipal);
 
 }
@@ -27,7 +26,16 @@ void FenetrePrincipale::afficherMenuPause()
 	setCurrentWidget(menuPause);
 }
 
+void FenetrePrincipale::afficherInstructions()
+{
+}
+
+void FenetrePrincipale::demarrerNouvellePartie()
+{
+}
+
 void FenetrePrincipale::afficherMenuPrincipal()
 {
+	setCurrentWidget(menuPrincipal);
 }
 
