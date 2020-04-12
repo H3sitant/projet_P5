@@ -4,7 +4,8 @@
 
 TEMPLATE = vcapp
 TARGET = projet
-INCLUDEPATH = .
+INCLUDEPATH += .
+
 # You can make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
 # Please consult the documentation of the deprecated API in order to know
@@ -14,23 +15,30 @@ INCLUDEPATH = .
 
 # Input
 HEADERS += burger.h \
+FenetrePrincipale.h \
            Condiment.h \
            fenetrejeu.h \
            panneaucentral.h \
            panneaudroite.h \
            panneaugauche.h \
            Personnage.h \
-           Powerup.h
+           Powerup.h \
+		   menu.h 
+		   
+		   
 FORMS += fenetrejeu.ui
 SOURCES += burger.cpp \
            condiment.cpp \
+		   FenetrePrincipale.cpp \
            fenetrejeu.cpp \
            main.cpp \
            panneaucentral.cpp \
            panneaudroite.cpp \
            panneaugauche.cpp \
            Personnage.cpp \
-           Powerup.cpp
+           Powerup.cpp \
+		   Menu.cpp 
+		   
 
 QT += widgets
 
