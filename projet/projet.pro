@@ -23,7 +23,8 @@ FenetrePrincipale.h \
            panneaugauche.h \
            Personnage.h \
            Powerup.h \
-		   menu.h 
+		   menu.h \
+		   pause.h
 		   
 		   
 FORMS += fenetrejeu.ui
@@ -37,7 +38,8 @@ SOURCES += burger.cpp \
            panneaugauche.cpp \
            Personnage.cpp \
            Powerup.cpp \
-		   Menu.cpp 
+		   Menu.cpp \
+		   Pause.cpp
 		   
 
 QT += widgets

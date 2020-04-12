@@ -23,5 +23,6 @@ private:
     QWidget *panneauDroite;
     QWidget *panneauCentral;
     QBasicTimer *timer;
+	FenetrePrincipale * parent;
 };
 #endif // FENETREJEU_H

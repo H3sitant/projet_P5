@@ -8,7 +8,7 @@
 
 FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
 {
-    
+	this->parent = parent;
     mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(0,0,0,0);
 
@@ -16,7 +16,7 @@ FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
     panneauCentral->setStyleSheet("background-color: rgba(0,0,0,0) ");
 
     panneauGauche = new PanneauGauche();
-    panneauDroite = new PanneauDroite();
+    panneauDroite = new PanneauDroite(this);
 
 
     mainLayout->addWidget(panneauGauche);
@@ -49,5 +49,6 @@ FenetreJeu::~FenetreJeu()
 
 
 void FenetreJeu::pause(){
-
+	printf("FenetreJeu::pause");
+	parent->afficherMenuPause();
 }
