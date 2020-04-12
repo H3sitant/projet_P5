@@ -26,5 +26,8 @@ public:
 	//Personnage copy();
 	friend ostream& operator<<(ostream& out, Personnage p);
 	void setHauteur(int newH);	
+	double getHight();
+private:
+	double Hight;
 };
 

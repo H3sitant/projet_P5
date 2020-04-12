@@ -10,6 +10,7 @@ using namespace std;
 
 PanneauCentral::PanneauCentral()
 {
+	finduJeux = false;
 	delayFalling = 0;
 	//FallingCondiments = new list<Condiment*>;
     scene = new QGraphicsScene(this);
@@ -37,10 +38,13 @@ PanneauCentral::PanneauCentral()
     pal.setColor(QPalette::Background, QColor(0,0,0,0));
     scene->setPalette(pal);*/
 	SetRecette(Grosseur_liste);
-
-	QTimer * timer = new QTimer();
-	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(CheckPosition()));
-	timer->start(5);
+	if (!finduJeux)
+	{
+		QTimer * timer = new QTimer();
+		QObject::connect(timer, SIGNAL(timeout()), this, SLOT(CheckPosition()));
+		timer->start(50);
+	}
+	
 }
 
 void PanneauCentral::SetRecette(int taille) {
@@ -59,8 +63,8 @@ void PanneauCentral::FC()
 {
 
 	Condiment *newFallingC = new Condiment(true);
-	newFallingC->setPos(rand() % LARGEUR, -HAUTEUR);
-	//newFallingC->setPos(player->getPosition(), -HAUTEUR);
+	newFallingC->setPos(rand() % LARGEUR, 0);
+	//newFallingC->setPos(player->x(), 0);
 	FallingCondiments.push_back(newFallingC);
 	scene->addItem(newFallingC);
 }
@@ -73,18 +77,26 @@ void PanneauCentral::CheckPosition()
 		FC();
 		delayFalling = 0;
 	}
-	bool finjeu = false;
 	if (!FallingCondiments.empty()) {
 		//verifierPowerups();
 		list<Condiment*> cpyFalling(FallingCondiments);
 		for (Condiment* c : cpyFalling) {
-			if (c->getPositionY() < player->getHauteurBurger()-10 && c->getPositionY() > player->getHauteurBurger() + 10 && c->getPositionX() > player->getPosition() - 50 && c->getPositionX() < player->getPosition() + 50) 
+			if (c->getFalling() == true)
 			{
-				//Condiment* copy(c);
-				c->setFalling(false);
-				FallingCondiments.remove(c);
-				//Powerup* p;
-				switch (c->getSorte()) {
+				c->setPosition(c->getPositionX(), c->getPositionY() + 10);
+				if (c->getPositionY() > 500)
+				{
+					FallingCondiments.remove(c);
+					delete c;
+				}
+				//else if (c->getPositionY() < player->getHauteurBurger()-10 && c->getPositionY() > player->getHauteurBurger() + 10 && c->getPositionX() > player->getPosition() - 50 && c->getPositionX() < player->getPosition() + 50) 
+				else if (c->getPositionY() ==500-player->getHight() && c->getPositionX() > player->x() - 10 && c->getPositionX() < player->x() + 10)
+				{
+					//Condiment* copy(c);
+					c->setFalling(false);
+					FallingCondiments.remove(c);
+					//Powerup* p;
+					switch (c->getSorte()) {
 
 					/*case Condiment::POWERUP:
 						p = dynamic_cast<Powerup*> (c);
@@ -93,21 +105,23 @@ void PanneauCentral::CheckPosition()
 							activerPower(*p);
 							break;
 						}*/
-				case Condiment::PAIN_H:
-					finjeu = true;
-				default:
-					player->ajouterCondiment(c);
-				}
+					case Condiment::PAIN_H:
+						finduJeux = true;
+					default:
+						player->ajouterCondiment(c);
+					}
 
-			}
-			else if (c->getPositionY() < 0) FallingCondiments.remove(c);
-			/*else if (coronaVirusMode & c->getPositionY() == int(HAUTEUR / 2)) {//Les éléments qui passent la moitié de l'écran on des chances de se transformer en virus
-				if (rand() % PROB_CORONA == 0) {
-					Condiment* contaminedCondiment = new Powerup(Powerup::CORONA, c->getPosition());
-					FallingCondiments.push_back(contaminedCondiment);
-					FallingCondiments.remove(c);
 				}
-			}*/
+				else if (c->getPositionY() < 0) FallingCondiments.remove(c);
+				/*else if (coronaVirusMode & c->getPositionY() == int(HAUTEUR / 2)) {//Les éléments qui passent la moitié de l'écran on des chances de se transformer en virus
+					if (rand() % PROB_CORONA == 0) {
+						Condiment* contaminedCondiment = new Powerup(Powerup::CORONA, c->getPosition());
+						FallingCondiments.push_back(contaminedCondiment);
+						FallingCondiments.remove(c);
+					}
+				}*/
+			}
+			
 		}
 	}
 }

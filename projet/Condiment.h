@@ -8,8 +8,8 @@
 using namespace std;
 
 struct Point {
-    int x;
-    int y;
+    double x;
+    double y;
 };
 class Condiment : public QObject, public QGraphicsPixmapItem
 {
@@ -25,22 +25,21 @@ public:
 	SorteCondiment getSorte();
 
 	void setFalling(bool isFalling);
-	void setPosition(int x, int y);
+	bool getFalling();
+	void setPosition(double x, double y);
 	
-	int getPositionX();
-	int getPositionY();
+	double getPositionX();
+	double getPositionY();
 
-	void setPositionX(int x);
-	void setPositionY(int y);
+	void setPositionX(double x);
+	void setPositionY(double y);
 
     bool operator==(const Condiment& c) const;
     Condiment& operator=(const Condiment& c);
-
-public slots:
-	void dropCondiments();
 private:
     SorteCondiment sorte;
 	bool falling;
+	Point position;
 };
 
 

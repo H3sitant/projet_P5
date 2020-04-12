@@ -7,6 +7,7 @@ using namespace std;
 Personnage::Personnage(int positionX,int positionY, QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     setPos(positionX,positionY);
+	Hight = 130;
 }
 Personnage::~Personnage()
 {
@@ -19,7 +20,7 @@ int Personnage::getPosition()
 void Personnage::setPosition(int newPosition)
 {
 	position = newPosition;
-
+	setPos(newPosition,y());
 }
 list<Condiment*> Personnage::getCondiments()
 {
@@ -109,6 +110,7 @@ char Personnage::toString() {
 }
 void Personnage::ajouterCondiment(Condiment* c) {
 	condiments.push_back(c);
+	Hight += 20;
 }
 /*Personnage Personnage::copy()
 {
@@ -126,4 +128,7 @@ void Personnage::setHauteur(int newH)
 	condiments = newcondiments;
 }
 
-
+double Personnage::getHight()
+{
+	return Hight;
+}

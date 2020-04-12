@@ -11,12 +11,6 @@ Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsP
 {
 	setSorte(static_cast<SorteCondiment>(rand() % POWERUP));
 	falling = isFalling;
-	if (falling)
-	{
-		QTimer * timer = new QTimer();
-		connect(timer, SIGNAL(timeout()), this, SLOT(dropCondiments()));
-		timer->start(50);
-	}
 }
 Condiment::Condiment(Point p) {
 	setPositionY(p.y);
@@ -89,34 +83,33 @@ void Condiment::setFalling(bool isFalling)
 {
 	falling = isFalling;
 }
-void Condiment::setPosition(int x, int y)
+
+bool Condiment::getFalling()
+{
+	return falling;
+}
+void Condiment::setPosition(double x, double y)
 {
 	setPos(x, y);
+	position = { x,y };
 }
-void Condiment::setPositionX(int x)
+void Condiment::setPositionX(double x)
 {
 	setPos(x, y());
+	position.x = x;
 }
-void Condiment::setPositionY(int y)
+void Condiment::setPositionY(double y)
 {
 	setPos(x(), y);
+	position.y = y;
 }
 
-int Condiment::getPositionX()
+double Condiment::getPositionX()
 {
 	return x();
 }
-int Condiment::getPositionY()
+double Condiment::getPositionY()
 {
-	return y();
-	
+	return y();	
 }
 
-void Condiment::dropCondiments()
-{
-	setPos(x(),y() + 10);
-	if (y() > 500)
-	{
-		delete this;
-	}
-}
