@@ -107,7 +107,7 @@ void PanneauCentral::CheckPosition()
 					}
 					else if (c->getSorte() == Condiment::PAIN_H)
 					{
-						finduJeux == true;
+						finduJeux = true;
 						timer->stop();
 						player->ajouterCondiment(c);
 						list<Condiment*> cpyFalling2(FallingCondiments);

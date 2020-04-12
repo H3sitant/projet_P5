@@ -22,3 +22,9 @@ projet/projet.pro.user
 projet/release/
 
 projet/projet.vcxproj
+
+projet/Makefile
+
+projet/Makefile.Debug
+
+projet/Makefile.Release

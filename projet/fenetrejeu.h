@@ -3,14 +3,15 @@
 
 #include <QMainWindow>
 #include <QtWidgets>
+#include "FenetrePrincipale.h"
 
-class FenetreJeu : public QMainWindow
+class FenetreJeu : public QWidget
 {
     Q_OBJECT
 
 public:
-    FenetreJeu(const char * appName=nullptr);
-    ~FenetreJeu();
+	FenetreJeu(FenetrePrincipale * parent=nullptr);
+	~FenetreJeu();
 
 public slots:
      void pause();
@@ -22,5 +23,6 @@ private:
     QWidget *panneauDroite;
     QWidget *panneauCentral;
     QBasicTimer *timer;
+	FenetrePrincipale * parent;
 };
 #endif // FENETREJEU_H

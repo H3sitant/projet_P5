@@ -1,7 +1,8 @@
 #include "panneaudroite.h"
 
-PanneauDroite::PanneauDroite()
+PanneauDroite::PanneauDroite(FenetreJeu*parent): QWidget(parent)
 {
+	this->parent = parent;
     layoutPanneauDroite = new QVBoxLayout();
     this->setLayout(layoutPanneauDroite);
 
@@ -21,7 +22,8 @@ PanneauDroite::PanneauDroite()
     boutonMenu = new QPushButton(this);
     boutonMenu->setText("");
     boutonMenu->setLayout(boutonMenuLayout);
-    boutonMenu->setStyleSheet("background-color: rgba(255, 255, 255, 0);qproperty-alignment: AlignRight;");
+    boutonMenu->setStyleSheet("qproperty-alignment: AlignRight;");
+	connect(boutonMenu, &QPushButton::clicked, this->parent, &FenetreJeu::pause);
 
     labelPowerup = new QLabel(tr("POWERUP ACTIF: \n AUCUN"),this);
 	labelImagePowerup = new QLabel();
@@ -43,9 +45,6 @@ PanneauDroite::PanneauDroite()
 }
 
 
-void PanneauDroite::slotBoutonMenu(){
-
-}
 void PanneauDroite::endPowerup(){
 
 }
