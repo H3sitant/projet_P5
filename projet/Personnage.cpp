@@ -110,6 +110,7 @@ char Personnage::toString() {
 }
 void Personnage::ajouterCondiment(Condiment* c) {
 	condiments.push_back(c);
+	if (c->getSorte() == Condiment::PAIN_H)Hight += 20;
 	Hight += 20;
 }
 /*Personnage Personnage::copy()

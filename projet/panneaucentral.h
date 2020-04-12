@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include "Personnage.h"
 #include "Condiment.h"
+#include <QTimer>
 
 
 #define Grosseur_liste 20
@@ -36,6 +37,7 @@ private:
 	list<Condiment*> FallingCondiments;
 	int delayFalling;
 	bool finduJeux;
+	QTimer * timer;
 };
 
 #endif // PANNEAUCENTRAL_H
