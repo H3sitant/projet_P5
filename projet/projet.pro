@@ -20,7 +20,6 @@ HEADERS += burger.h \
            panneaudroite.h \
            panneaugauche.h \
            Personnage.h \
-           FallingCond.h \
            Powerup.h
 FORMS += fenetrejeu.ui
 SOURCES += burger.cpp \
@@ -31,7 +30,6 @@ SOURCES += burger.cpp \
            panneaudroite.cpp \
            panneaugauche.cpp \
            Personnage.cpp \
-           FallingCond.cpp \
            Powerup.cpp
 
 QT += widgets
