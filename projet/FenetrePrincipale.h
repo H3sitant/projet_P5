@@ -21,6 +21,7 @@ private:
 	QWidget *jeu;
 	QWidget* menuPrincipal;
 	QWidget* menuPause;
+	QWidget* instructions;
 
 };
 #endif // FENETREPRINCIPALE_H

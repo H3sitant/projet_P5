@@ -24,7 +24,8 @@ FenetrePrincipale.h \
            Personnage.h \
            Powerup.h \
 		   menu.h \
-		   pause.h
+		   pause.h \
+		   instructions.h
 		   
 		   
 FORMS += fenetrejeu.ui
@@ -39,7 +40,8 @@ SOURCES += burger.cpp \
            Personnage.cpp \
            Powerup.cpp \
 		   Menu.cpp \
-		   Pause.cpp
+		   Pause.cpp\
+		   Instructions.cpp
 		   
 
 QT += widgets

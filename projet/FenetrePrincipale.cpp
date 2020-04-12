@@ -2,15 +2,18 @@
 #include "menu.h"
 #include "fenetrejeu.h"
 #include "pause.h"
+#include "instructions.h"
 
 FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 {
 	jeu = new FenetreJeu(this);
 	menuPrincipal = new Menu(this);
 	menuPause = new Pause(this);
+	instructions = new Instructions(this);
 	addWidget(jeu);
 	addWidget(menuPrincipal);
 	addWidget(menuPause);
+	addWidget(instructions);
 	setCurrentWidget(menuPrincipal);
 
 }
@@ -28,6 +31,8 @@ void FenetrePrincipale::afficherMenuPause()
 
 void FenetrePrincipale::afficherInstructions()
 {
+	printf("FenetrePrincipale::afficherInstructions");
+	setCurrentWidget(instructions);
 }
 
 void FenetrePrincipale::demarrerNouvellePartie()

@@ -9,7 +9,6 @@ Menu::Menu(FenetrePrincipale * parent)
 	: QWidget(parent)
 {
 	this->parent = parent;
-	QWidget *widget = new QWidget;
 	QVBoxLayout *layout = new QVBoxLayout;
 	 jouer = new QPushButton("Jouer");
 
@@ -33,6 +32,7 @@ void Menu::actionJouer() {
 }
 void Menu::actionInstruction() {
 	printf("instrcutions");
+	parent->afficherInstructions();
 }
 void Menu::actionReglages() {
 	printf("reglages");
