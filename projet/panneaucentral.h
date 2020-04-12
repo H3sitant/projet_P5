@@ -3,11 +3,12 @@
 #include <QGraphicsView>
 #include "Personnage.h"
 #include "Condiment.h"
+#include <QTimer>
 
 
 #define Grosseur_liste 20
 #define Speed 10
-#define DelayFall 400 // 1=5 milliseconde
+#define DelayFall 20 // 1=50 milliseconde
 
 //modifier la taille de la liste avec le score ->  score + 2 < 10 ? liste_longeur = (score + 2):liste_longeur=(9);
 
@@ -35,6 +36,8 @@ private:
 	Condiment recette[Grosseur_liste];
 	list<Condiment*> FallingCondiments;
 	int delayFalling;
+	bool finduJeux;
+	QTimer * timer;
 };
 
 #endif // PANNEAUCENTRAL_H
