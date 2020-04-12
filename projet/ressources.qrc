@@ -24,16 +24,17 @@
         <file alias="Texte_Temps.png">images/Texte_Temps.png</file>
         <file alias="Tomate.png">images/Tomate.png</file>
         <file alias="Viande.png">images/Viande.png</file>
-      <file alias="Bouton_Pause.png">images/Bouton_Pause.png</file>
-      <file alias="Fleche_Droite.png">images/Fleche_Droite.png</file>
-      <file alias="etoile.png">images/etoile.png</file>
-      <file alias="Fleche_Gauche.png">images/Fleche_Gauche.png</file>
-      <file alias="Mayo.png">images/Mayo.png</file>
-      <file alias="Petit_Rainbow.png">images/Petit_Rainbow.png</file>
-      <file alias="Petite_etoile.png">images/Petite_etoile.png</file>
-      <file alias="Petite_Potion.png">images/Petite_Potion.png</file>
-      <file alias="Potion.png">images/Potion.png</file>
-      <file alias="Rainbow.png">images/Rainbow.png</file>
+      	<file alias="Bouton_Pause.png">images/Bouton_Pause.png</file>
+      	<file alias="Fleche_Droite.png">images/Fleche_Droite.png</file>
+      	<file alias="etoile.png">images/etoile.png</file>
+      	<file alias="Fleche_Gauche.png">images/Fleche_Gauche.png</file>
+     	<file alias="Mayo.png">images/Mayo.png</file>
+      	<file alias="Petit_Rainbow.png">images/Petit_Rainbow.png</file>
+      	<file alias="Petite_etoile.png">images/Petite_etoile.png</file>
+      	<file alias="Petite_Potion.png">images/Petite_Potion.png</file>
+      	<file alias="Potion.png">images/Potion.png</file>
+      	<file alias="Rainbow.png">images/Rainbow.png</file>
+      	<file alias="Petit_Covid.png">images/Petit_Covid.png</file>
     </qresource>
   <qresource prefix="/police">
     <file alias="pixelated.ttf">police/pixelated.ttf</file>

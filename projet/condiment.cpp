@@ -10,6 +10,7 @@
 Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsPixmapItem()
 {
 	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP+1)));
+	//setSorte(Condiment::POWERUP);
 	falling = isFalling;
 }
 Condiment::Condiment(Point p) {
@@ -58,7 +59,8 @@ void Condiment::setSorte(SorteCondiment sorte)
 		imagePath += "Fromage.png";
 		break;
 	case Condiment::POWERUP:
-		imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
+		//imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
+		imagePath += setSortePow(SortePowerup::CORONA);
 		break;
 	default:
 		imagePath += "Erreur.png";
@@ -122,16 +124,16 @@ string Condiment::setSortePow(SortePowerup sorte) {
 	string Path;
 	switch (sorte) {
 	case RAINBOW:
-		Path = "Rainbow.png";
+		Path = "Petit_Rainbow.png";
 		break;
 	case CORONA:
-		Path = "Covid.png";
+		Path = "Petit_Covid.png";
 		break;
 	case POTION:
-		Path = "Potion.png";
+		Path = "Petite_Potion.png";
 		break;
 	case STAR:
-		Path = "etoile.png";
+		Path = "Petite_etoile.png";
 		break;
 	default:
 		Path = "Erreur.png";

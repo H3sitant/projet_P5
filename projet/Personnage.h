@@ -9,6 +9,7 @@ class Personnage: public QObject, public QGraphicsPixmapItem
 private:
 	int position;
 	list<Condiment*> condiments;
+	double Hight;
 
 public:
     Personnage(int positionX=0, int positionY=0,QGraphicsItem *parent=nullptr);
@@ -27,7 +28,6 @@ public:
 	friend ostream& operator<<(ostream& out, Personnage p);
 	void setHauteur(int newH);	
 	double getHight();
-private:
-	double Hight;
+	
 };
 

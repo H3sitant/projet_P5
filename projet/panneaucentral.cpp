@@ -65,6 +65,12 @@ void PanneauCentral::FC()
 	newFallingC->setPos(rand() % LARGEUR, 0);
 	//newFallingC->setPos(player->x(), 0);
 	FallingCondiments.push_back(newFallingC);
+	if (newFallingC->getSorte() == Condiment::POWERUP)
+	{
+		newFallingC->setScale(0.5);
+		if (newFallingC->getSortePow() == Powerup::RAINBOW)newFallingC->setOffset({ 45,-20 });
+		else newFallingC->setOffset({ 50,-50 });	
+	}
 	scene->addItem(newFallingC);
 }
 
@@ -90,22 +96,18 @@ void PanneauCentral::CheckPosition()
 					FallingCondiments.remove(c);
 					delete c;
 				}
-				//else if (c->getPositionY() < player->getHauteurBurger()-10 && c->getPositionY() > player->getHauteurBurger() + 10 && c->getPositionX() > player->getPosition() - 50 && c->getPositionX() < player->getPosition() + 50) 
-				else if (c->getPositionY() ==500-player->getHight()-itemSize && c->getPositionX() > player->x() - 10 && c->getPositionX() < player->x() + 10)
+				else if (c->getSorte() == Condiment::POWERUP && c->getPositionY() == 500 - player->getHight() - itemSize && c->getPositionX() > player->x() - 40 && c->getPositionX() < player->x() + 40)
 				{
-					//Condiment* copy(c);
 					c->setFalling(false);
 					FallingCondiments.remove(c);
-					Powerup* p;
-					if (c->getSorte() == Condiment::POWERUP) {
-						p = dynamic_cast<Powerup*> (c);
-						if (p) //vérifie que le cast s'est bien passé
-						{
-							activerPower(p);
-							break;
-						}
-					}
-					else if (c->getSorte() == Condiment::PAIN_H)
+					activerPower(c);
+					delete c;
+				}
+				else if (c->getPositionY() ==500-player->getHight()-itemSize && c->getPositionX() > player->x() - 10 && c->getPositionX() < player->x() + 10)
+				{
+					c->setFalling(false);
+					FallingCondiments.remove(c);
+					if (c->getSorte() == Condiment::PAIN_H)
 					{
 						finduJeux = true;
 						timer->stop();
@@ -164,6 +166,10 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
 }*/
 
 
+
+//================================================
+//PowerUp
+//================================================
 void PanneauCentral::verifierPowerups() {
 	if (powerUpActif != NULL) {
 		if (tempsRestantPowerup-- > 0) {
@@ -182,7 +188,7 @@ void PanneauCentral::verifierPowerups() {
 }
 
 void PanneauCentral::activerRainbow() {
-	int i = 0;
+	/*int i = 0;
 	bool pileIsGood = true;
 	Condiment::SorteCondiment condimentVoulu;
 	for (Condiment *c : player->getCondiments()) {
@@ -204,33 +210,39 @@ void PanneauCentral::activerRainbow() {
 			newFalling.push_back(new Powerup(Powerup::POTION));
 		}
 	}
-	FallingCondiments = newFalling;
+	FallingCondiments = newFalling;*/
 }
 
-void PanneauCentral::activerPower(Powerup *powerup)
+void PanneauCentral::activerPower(Condiment *powerup)
 {
 	cout << "Powerup activé!";
 	//TODO Coder les différentes effets des powerups
 	switch (powerup->getSortePow()) {
 	case Powerup::STAR:
-		//powerUpActif = powerup.toString();
+		//powerUpActif = Déplacement plus rapide
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
+		cout << "Activer powerUp : Star";
 		break;
 	case Powerup::RAINBOW:
-		powerUpActif = powerup->toString();
-		tempsRestantPowerup = TEMPS_MAX_POWERUP;
-		activerRainbow();
+		//powerUpActif = Toujours le bon item
+		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
+		//activerRainbow();
+		cout << "Activer powerUp : Rainbow";
 		break;
 	case Powerup::POTION:
 		//Retire le dernier condiment de la pile du joueur
 		//Powerup de type passif -> application immédiate
-		if (!player->getCondiments().empty()) {
+		if (player->getCondiments().size() > 1) {
 			player->retirerTop();
 		}
+		cout << "Activer powerUp : Potion";
 		break;
 	case Powerup::CORONA:
 		//Le corona fait le bordel et mélange le burger constitué
-		player->mixBurger();
+		if (player->getCondiments().size() > 2) {
+			player->mixBurger();
+		}
+		cout << "Activer powerUp : Covid";
 		break;
 	default:
 		throw (invalid_argument("Type de powerup non pris en charge"));

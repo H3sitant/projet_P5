@@ -41,7 +41,7 @@ public:
     Condiment& operator=(const Condiment& c);
 private:
     SorteCondiment sorte;
-	bool falling;
+	bool falling=false;
 	Point position;
 	SortePowerup sortePow;
 };

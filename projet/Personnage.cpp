@@ -28,37 +28,47 @@ list<Condiment*> Personnage::getCondiments()
 }
 
 void Personnage::retirerTop() {
-	for (auto c : condiments) {
-		if (c->getPositionY() == condiments.size()) {
-			condiments.remove(c);
-			break;
+	list<Condiment*> cpyFalling2(condiments);
+	for (Condiment* c2 : cpyFalling2)
+	{
+		if (c2 == condiments.back())
+		{
+			condiments.remove(c2);
+			delete c2;
 		}
 	}
+	Hight -= 20;
 }
 void Personnage::mixBurger()
 {
-	for (int i = 0; i < condiments.size(); i++) {
-		int from = (rand() % condiments.size()) + 1; //Génère un nombre entre 1 et la hauteur de la liste.. ce qui représente une coordonnée y
-		int to = (rand() % condiments.size()) + 1;
-		if (from != to) {
-			Condiment* first =nullptr;
-			Condiment* second=nullptr;
-			for (auto c : condiments)
+	list<Condiment*> newcondiments;
+	double newHight= 150;
+	newcondiments.push_back(condiments.front());
+	condiments.remove(condiments.front());
+	int itration = condiments.size();
+	for (int i = 0; i < itration; i++)
+	{
+		int from = rand() % condiments.size();
+		int j=0;
+		list<Condiment*> cpyFalling(condiments);
+		for (Condiment* c : cpyFalling)
+		{
+			if (j == from)
 			{
-				if (c->getPositionY() == from) {
-					first = c;
-				}
-				else if ((c->getPositionY() == to)) {
-					second = c;
-				}
+				newcondiments.push_back(c);
+				c->setPositionY(500 - newHight);
+				newHight += 20;
+				condiments.remove(c);
 			}
-			//On échange la hauteur des deux
-			if (first != nullptr && second != nullptr) {
-				first->setPositionY(to);
-				second->setPositionY(from);
-			}
+			j++;
 		}
 	}
+	condiments.clear();
+	for (Condiment* c : newcondiments)
+	{
+		condiments.push_back(c);
+	}
+
 }
 void Personnage::setCondiments(list<Condiment*> newCondiments)
 {

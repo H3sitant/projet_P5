@@ -23,7 +23,7 @@ public:
     const int HAUTEUR = 500;
 	void verifierPowerups();
 	void activerRainbow();
-	void activerPower(Powerup *powerup);
+	void activerPower(Condiment *powerup);
 
 public slots:
      void droite();
