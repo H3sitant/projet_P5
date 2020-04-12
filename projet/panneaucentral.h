@@ -2,6 +2,7 @@
 #define PANNEAUCENTRAL_H
 #include <QGraphicsView>
 #include "Personnage.h"
+#include "Powerup.h"
 #include "Condiment.h"
 #include <QTimer>
 
@@ -20,6 +21,9 @@ public:
 	void SetRecette(int taille);
     const int LARGEUR = 500;
     const int HAUTEUR = 500;
+	void verifierPowerups();
+	void activerRainbow();
+	void activerPower(Powerup *powerup);
 
 public slots:
      void droite();
@@ -38,6 +42,12 @@ private:
 	int delayFalling;
 	bool finduJeux;
 	QTimer * timer;
+	char powerUpActif = NULL;
+	int tempsRestantPowerup = 0;
+	static const int TEMPS_MAX_POWERUP = 10;
+	static const int PROBPOWERUP = 2;
+	static const int PROB_CORONA = 5;
+	
 };
 
 #endif // PANNEAUCENTRAL_H

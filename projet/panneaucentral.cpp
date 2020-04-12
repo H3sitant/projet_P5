@@ -77,7 +77,7 @@ void PanneauCentral::CheckPosition()
 		delayFalling = 0;
 	}
 	if (!FallingCondiments.empty()) {
-		//verifierPowerups();
+		verifierPowerups();
 		list<Condiment*> cpyFalling(FallingCondiments);
 		for (Condiment* c : cpyFalling) {
 			if (c->getFalling() == true)
@@ -96,14 +96,22 @@ void PanneauCentral::CheckPosition()
 					//Condiment* copy(c);
 					c->setFalling(false);
 					FallingCondiments.remove(c);
-					//Powerup* p;
-					if (c->getSorte() == Condiment::PAIN_H)
+					Powerup* p;
+					if (c->getSorte() == Condiment::POWERUP) {
+						p = dynamic_cast<Powerup*> (c);
+						if (p) //vérifie que le cast s'est bien passé
+						{
+							activerPower(p);
+							break;
+						}
+					}
+					else if (c->getSorte() == Condiment::PAIN_H)
 					{
 						finduJeux == true;
 						timer->stop();
 						player->ajouterCondiment(c);
 						list<Condiment*> cpyFalling2(FallingCondiments);
-						for (Condiment* c2 : cpyFalling2) 
+						for (Condiment* c2 : cpyFalling2)
 						{
 							FallingCondiments.remove(c2);
 							delete c2;
@@ -113,15 +121,6 @@ void PanneauCentral::CheckPosition()
 					{
 						player->ajouterCondiment(c);
 					}
-					/*case Condiment::POWERUP:
-						p = dynamic_cast<Powerup*> (c);
-						if (p) //vérifie que le cast s'est bien passé
-						{
-							activerPower(*p);
-							break;
-						}*/		
-					//}
-
 				}
 				/*else if (coronaVirusMode & c->getPositionY() == int(HAUTEUR / 2)) {//Les éléments qui passent la moitié de l'écran on des chances de se transformer en virus
 					if (rand() % PROB_CORONA == 0) {
@@ -163,3 +162,77 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
     cerr << player->y() << endl;
 
 }*/
+
+
+void PanneauCentral::verifierPowerups() {
+	if (powerUpActif != NULL) {
+		if (tempsRestantPowerup-- > 0) {
+			switch (powerUpActif) {
+			case 'R': //Rainbow
+				activerRainbow();
+				break;
+			default:
+				throw invalid_argument("Type de PowerUp non pris en charge");
+			}
+		}
+		else {
+			powerUpActif = NULL;
+		}
+	}
+}
+
+void PanneauCentral::activerRainbow() {
+	int i = 0;
+	bool pileIsGood = true;
+	Condiment::SorteCondiment condimentVoulu;
+	for (Condiment *c : player->getCondiments()) {
+		if (c->getSorte() != recette[i].getSorte()) {
+			pileIsGood = false;
+		}
+		i++;
+	}
+	list<Condiment*> newFalling;
+	if (pileIsGood) {
+		condimentVoulu = recette[i].getSorte();
+		for (Condiment *c : FallingCondiments) {
+			newFalling.push_back(new Condiment(condimentVoulu));
+		}
+	}
+	else //On transforme les condiments en potion pour permettre au joueur de corriger ses erreurs
+	{
+		for (Condiment* c : FallingCondiments) {
+			newFalling.push_back(new Powerup(Powerup::POTION));
+		}
+	}
+	FallingCondiments = newFalling;
+}
+
+void PanneauCentral::activerPower(Powerup *powerup)
+{
+	cout << "Powerup activé!";
+	//TODO Coder les différentes effets des powerups
+	switch (powerup->getSortePow()) {
+	case Powerup::STAR:
+		//powerUpActif = powerup.toString();
+		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
+		break;
+	case Powerup::RAINBOW:
+		powerUpActif = powerup->toString();
+		tempsRestantPowerup = TEMPS_MAX_POWERUP;
+		activerRainbow();
+		break;
+	case Powerup::POTION:
+		//Retire le dernier condiment de la pile du joueur
+		//Powerup de type passif -> application immédiate
+		if (!player->getCondiments().empty()) {
+			player->retirerTop();
+		}
+		break;
+	case Powerup::CORONA:
+		//Le corona fait le bordel et mélange le burger constitué
+		player->mixBurger();
+		break;
+	default:
+		throw (invalid_argument("Type de powerup non pris en charge"));
+	}
+}

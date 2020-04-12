@@ -9,13 +9,13 @@
 
 Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsPixmapItem()
 {
-	setSorte(static_cast<SorteCondiment>(rand() % POWERUP));
+	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP+1)));
 	falling = isFalling;
 }
 Condiment::Condiment(Point p) {
 	setPositionY(p.y);
 	setPositionX(p.x);
-	setSorte(static_cast<SorteCondiment>(rand() % POWERUP));
+	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP+1)));
 }
 
 Condiment::Condiment(SorteCondiment sorte, Point position) {
@@ -58,15 +58,14 @@ void Condiment::setSorte(SorteCondiment sorte)
 		imagePath += "Fromage.png";
 		break;
 	case Condiment::POWERUP:
-		// image est définis dans Powerup.cpp
+		imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
 		break;
 	default:
 		imagePath += "Erreur.png";
 		break;
 		
 	}
-	if(sorte!= Condiment::POWERUP) setPixmap(QPixmap(imagePath.c_str()));
-
+	setPixmap(QPixmap(imagePath.c_str()));
 }
 
 bool Condiment::operator==(const Condiment& c) const
@@ -113,3 +112,34 @@ double Condiment::getPositionY()
 	return y();	
 }
 
+
+//================================================================
+//power up
+//================================================================
+
+string Condiment::setSortePow(SortePowerup sorte) {
+	sortePow = sorte;
+	string Path;
+	switch (sorte) {
+	case RAINBOW:
+		Path = "Rainbow.png";
+		break;
+	case CORONA:
+		Path = "Covid.png";
+		break;
+	case POTION:
+		Path = "Potion.png";
+		break;
+	case STAR:
+		Path = "etoile.png";
+		break;
+	default:
+		Path = "Erreur.png";
+		break;
+		
+	}
+	return Path;
+}
+enum Condiment::SortePowerup Condiment::getSortePow() {
+	return sortePow;
+}

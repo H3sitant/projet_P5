@@ -16,7 +16,10 @@ class Condiment : public QObject, public QGraphicsPixmapItem
      Q_OBJECT
 public:
 	enum SorteCondiment { PAIN_H, PAIN_B, LAITUE, TOMATE, OIGNON, BOULETTE, FROMAGE, POWERUP }; //IMPORTANT: Powerup doit demeurer à la fin de l'enum
+	enum SortePowerup { STAR, RAINBOW, POTION, CORONA, last }; //Last doit rester en dernier
 
+	string setSortePow(SortePowerup sorte);
+	SortePowerup getSortePow();
 	Condiment(bool Isfalling, QGraphicsItem*parent=0);
 	Condiment(Point p = { 0,0 });
 	Condiment(SorteCondiment sorte, Point position);
@@ -40,6 +43,7 @@ private:
     SorteCondiment sorte;
 	bool falling;
 	Point position;
+	SortePowerup sortePow;
 };
 
 

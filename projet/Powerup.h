@@ -1,15 +1,16 @@
 #pragma once
 #include "condiment.h"
- class Powerup : public Condiment {
+class Powerup : public Condiment {
 public:
-    enum SortePowerup{STAR, RAINBOW, POTION, CORONA, last}; //Last doit rester en dernier
-    Powerup(SortePowerup sorte, Point position);
-    Powerup();
-    char toString();
-    SortePowerup getSortePow();
-    void setSortePow(SortePowerup sorte);
+	enum SortePowerup { STAR, RAINBOW, POTION, CORONA, last }; //Last doit rester en dernier
+	Powerup(SortePowerup sorte, Point position);
+	Powerup(SortePowerup sorte);
+	Powerup();
+	char toString();
+	SortePowerup getSortePow();
+	void setSortePow(SortePowerup sorte);
 
- private:
-     SortePowerup sortePow;
+private:
+	SortePowerup sortePow;
 };
 

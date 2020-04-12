@@ -7,19 +7,21 @@ Powerup::Powerup(SortePowerup sorte, Point position) : Condiment(SorteCondiment:
 	setPosition(position.x, position.y);
 }
 Powerup::Powerup() : Condiment(SorteCondiment::POWERUP, { 0,0 }) {
-	setSortePow(static_cast <SortePowerup>(rand()%last));
+	setSortePow(static_cast <SortePowerup>(rand() % last));
 }
-
+Powerup::Powerup(SortePowerup sorte) : Condiment(SorteCondiment::POWERUP) {
+	setSortePow(sorte);
+}
 Powerup::SortePowerup Powerup::getSortePow() {
 	return sortePow;
 }
 void Powerup::setSortePow(SortePowerup sorte) {
 	sortePow = sorte;
 	string imagePath = ":/images/";
-	switch (sorte){
+	switch (sorte) {
 	case RAINBOW:
 		imagePath += "Rainbow.png";
-			break;
+		break;
 	case CORONA:
 		imagePath += "Covid.png";
 		break;
@@ -29,7 +31,7 @@ void Powerup::setSortePow(SortePowerup sorte) {
 	default:
 		imagePath += "Erreur.png";
 		break;
-	
+
 	}
 	setPixmap(QPixmap(imagePath.c_str()));
 }
