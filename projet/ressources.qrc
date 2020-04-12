@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="background.jpg">images/background.jpg</file>
+        <file alias="Bouton_Menu.png">images/Bouton_Menu.png</file>
+        <file alias="Burger_Complet.png">images/Burger_Complet.png</file>
+        <file alias="Case_Bleue.png">images/Case_Bleue.png</file>
+        <file alias="Case_Rose.png">images/Case_Rose.png</file>
+        <file alias="Coeur.png">images/Coeur.png</file>
+        <file alias="Covid.png">images/Covid.png</file>
+        <file alias="Erreur.png">images/Erreur.png</file>
+        <file alias="Fond_Jeu.png">images/Fond_Jeu.png</file>
+        <file alias="Fond_Menu.png">images/Fond_Menu.png</file>
+        <file alias="Fromage.png">images/Fromage.png</file>
+        <file alias="Laitue.png">images/Laitue.png</file>
+        <file alias="Licorne.png">images/Licorne.png</file>
+        <file alias="Modele_Burger.png">images/Modele_Burger.png</file>
+        <file alias="Oignon.png">images/Oignon.png</file>
+        <file alias="Pain_Bas.png">images/Pain_Bas.png</file>
+        <file alias="Pain_Haut.png">images/Pain_Haut.png</file>
+        <file alias="personnage.png">images/personnage.png</file>
+        <file alias="personnage2.png">images/personnage2.png</file>
+        <file alias="Texte_Covid.png">images/Texte_Covid.png</file>
+        <file alias="Texte_Points.png">images/Texte_Points.png</file>
+        <file alias="Texte_Temps.png">images/Texte_Temps.png</file>
+        <file alias="Tomate.png">images/Tomate.png</file>
+        <file alias="Viande.png">images/Viande.png</file>
+    </qresource>
+  <qresource prefix="/police">
+    <file alias="pixelated.ttf">police/pixelated.ttf</file>
+    <file alias="Teletactile.ttf">police/Teletactile.ttf</file>
+  </qresource>
+</RCC>
