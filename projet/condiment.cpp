@@ -59,8 +59,8 @@ void Condiment::setSorte(SorteCondiment sorte)
 		imagePath += "Fromage.png";
 		break;
 	case Condiment::POWERUP:
-		//imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
-		imagePath += setSortePow(SortePowerup::CORONA);
+		imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
+		//imagePath += setSortePow(SortePowerup::RAINBOW);
 		break;
 	default:
 		imagePath += "Erreur.png";

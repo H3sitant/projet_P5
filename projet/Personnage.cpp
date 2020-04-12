@@ -86,7 +86,7 @@ void Personnage::deplacer(int direction, int largeur)
 		}
 		else
 		{
-            setX(x()-10);
+            setX(x()-moveSpeed);
 		}
 	}
 	else
@@ -97,13 +97,12 @@ void Personnage::deplacer(int direction, int largeur)
 		}
 		else
 		{
-            setX(x()+10);
+            setX(x()+ moveSpeed);
 		}
 	}
 	
 	for(Condiment* c : condiments) {
-		if (c->getSorte()==Condiment::PAIN_B) c->setPositionX(x()+10);
-		else c->setPositionX(x());
+		c->setPositionX(x());
 	}
 }
 size_t Personnage::getHauteurBurger()
@@ -143,4 +142,9 @@ void Personnage::setHauteur(int newH)
 double Personnage::getHight()
 {
 	return Hight;
+}
+
+void Personnage::setmovementSpeed(int speed)
+{
+	moveSpeed = speed;
 }

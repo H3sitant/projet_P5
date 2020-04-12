@@ -18,7 +18,7 @@ class PanneauCentral : public QGraphicsView
 	Q_OBJECT
 public:
     PanneauCentral();
-	void SetRecette(int taille);
+	void SetRecette();
     const int LARGEUR = 500;
     const int HAUTEUR = 500;
 	void verifierPowerups();
@@ -47,7 +47,8 @@ private:
 	static const int TEMPS_MAX_POWERUP = 10;
 	static const int PROBPOWERUP = 2;
 	static const int PROB_CORONA = 5;
-	
+	int largeurCapter = 10;
+	int tailleRecette;
 };
 
 #endif // PANNEAUCENTRAL_H

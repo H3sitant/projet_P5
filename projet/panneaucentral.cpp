@@ -10,6 +10,7 @@ using namespace std;
 PanneauCentral::PanneauCentral()
 {
 	finduJeux = false;
+	tailleRecette = Grosseur_liste;
 	delayFalling = 0;
 	//FallingCondiments = new list<Condiment*>;
     scene = new QGraphicsScene(this);
@@ -39,15 +40,15 @@ PanneauCentral::PanneauCentral()
     /*QPalette pal = QPalette();
     pal.setColor(QPalette::Background, QColor(0,0,0,0));
     scene->setPalette(pal);*/
-	SetRecette(Grosseur_liste);
+	SetRecette();
 	
 	timer = new QTimer();
 	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(CheckPosition()));
 	timer->start(50);
 }
 
-void PanneauCentral::SetRecette(int taille) {
-	for (int i = 0; i < taille; i++)
+void PanneauCentral::SetRecette() {
+	for (int i = 0; i < tailleRecette; i++)
 	{
 		//Permet de s'assurer qu'aucun pain n'est généré.. pourrait être amélioré car peut prendre du temps
 		do {
@@ -55,14 +56,13 @@ void PanneauCentral::SetRecette(int taille) {
 		} while (recette[i].getSorte() == Condiment::PAIN_H );
 	}
 	//Le dernier ingrédient est un pain
-	recette[taille - 1] = Condiment(Condiment::PAIN_H, Point());
+	recette[tailleRecette - 1] = Condiment(Condiment::PAIN_H);
 }
 
 void PanneauCentral::FC()
 {
-
 	Condiment *newFallingC = new Condiment(true);
-	newFallingC->setPos(rand() % LARGEUR, 0);
+	newFallingC->setPos(rand() % LARGEUR-50, 0);
 	//newFallingC->setPos(player->x(), 0);
 	FallingCondiments.push_back(newFallingC);
 	if (newFallingC->getSorte() == Condiment::POWERUP)
@@ -79,7 +79,8 @@ void PanneauCentral::CheckPosition()
 	delayFalling++;
 	if (delayFalling == DelayFall)
 	{
-		FC();
+		if (powerUpActif == 'R') activerRainbow();
+		else FC();
 		delayFalling = 0;
 	}
 	if (!FallingCondiments.empty()) {
@@ -103,7 +104,7 @@ void PanneauCentral::CheckPosition()
 					activerPower(c);
 					delete c;
 				}
-				else if (c->getPositionY() ==500-player->getHight()-itemSize && c->getPositionX() > player->x() - 10 && c->getPositionX() < player->x() + 10)
+				else if (c->getPositionY() ==500-player->getHight()-itemSize && c->getPositionX() > player->x() - largeurCapter && c->getPositionX() < player->x() + largeurCapter)
 				{
 					c->setFalling(false);
 					FallingCondiments.remove(c);
@@ -171,46 +172,43 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
 //PowerUp
 //================================================
 void PanneauCentral::verifierPowerups() {
-	if (powerUpActif != NULL) {
-		if (tempsRestantPowerup-- > 0) {
-			switch (powerUpActif) {
-			case 'R': //Rainbow
-				activerRainbow();
-				break;
-			default:
-				throw invalid_argument("Type de PowerUp non pris en charge");
-			}
+	tempsRestantPowerup--;
+	if (tempsRestantPowerup <= 0)
+	{
+		if (powerUpActif = 'S')
+		{
+			player->setmovementSpeed(10);
+			largeurCapter = 10;
 		}
-		else {
-			powerUpActif = NULL;
-		}
+		powerUpActif = NULL;
 	}
 }
 
 void PanneauCentral::activerRainbow() {
-	/*int i = 0;
-	bool pileIsGood = true;
-	Condiment::SorteCondiment condimentVoulu;
-	for (Condiment *c : player->getCondiments()) {
-		if (c->getSorte() != recette[i].getSorte()) {
-			pileIsGood = false;
-		}
-		i++;
-	}
-	list<Condiment*> newFalling;
-	if (pileIsGood) {
-		condimentVoulu = recette[i].getSorte();
-		for (Condiment *c : FallingCondiments) {
-			newFalling.push_back(new Condiment(condimentVoulu));
-		}
-	}
-	else //On transforme les condiments en potion pour permettre au joueur de corriger ses erreurs
+	
+	Condiment *newFallingC = new Condiment();
+	if (player->getCondiments().size() < tailleRecette)
 	{
-		for (Condiment* c : FallingCondiments) {
-			newFalling.push_back(new Powerup(Powerup::POTION));
-		}
+		newFallingC->setSorte(recette[player->getCondiments().size()].getSorte());
 	}
-	FallingCondiments = newFalling;*/
+	else
+	{
+		newFallingC->setSorte(Condiment::POWERUP);
+		/*int i = rand() % 2;
+		if(i==0) newFallingC->setSortePow(Condiment::POTION);
+		else newFallingC->setSortePow(Condiment::CORONA);*/
+	}
+	newFallingC->setFalling(true);
+	newFallingC->setPos(rand() % LARGEUR - 50, 0);
+	//newFallingC->setPos(player->x(), 0);
+	FallingCondiments.push_back(newFallingC);
+	if (newFallingC->getSorte() == Condiment::POWERUP)
+	{
+		newFallingC->setScale(0.5);
+		if (newFallingC->getSortePow() == Powerup::RAINBOW)newFallingC->setOffset({ 45,-20 });
+		else newFallingC->setOffset({ 50,-50 });
+	}
+	scene->addItem(newFallingC);
 }
 
 void PanneauCentral::activerPower(Condiment *powerup)
@@ -222,12 +220,18 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		//powerUpActif = Déplacement plus rapide
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
 		cout << "Activer powerUp : Star";
+		player->setmovementSpeed(20);
+		largeurCapter = 15;
+		powerUpActif = 'S';
+		tempsRestantPowerup = 200;// 1=50 milliseconde
 		break;
 	case Powerup::RAINBOW:
 		//powerUpActif = Toujours le bon item
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
-		//activerRainbow();
 		cout << "Activer powerUp : Rainbow";
+		powerUpActif = 'R';
+		tempsRestantPowerup = 200;
+		activerRainbow();
 		break;
 	case Powerup::POTION:
 		//Retire le dernier condiment de la pile du joueur
