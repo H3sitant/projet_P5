@@ -13,6 +13,7 @@ public:
 
 	void afficherJeu();
 	void afficherMenuPrincipal();
+	void retour();
 	void afficherMenuPause();
 	void afficherInstructions();
 	void demarrerNouvellePartie();
@@ -22,6 +23,7 @@ private:
 	QWidget* menuPrincipal;
 	QWidget* menuPause;
 	QWidget* instructions;
+	int lastWidgetId=0;
 
 };
 #endif // FENETREPRINCIPALE_H

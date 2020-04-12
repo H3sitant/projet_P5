@@ -20,27 +20,43 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 
 void FenetrePrincipale::afficherJeu()
 {
+	int memCurrentIndex = currentIndex();
 	setCurrentWidget(jeu);
+	lastWidgetId = memCurrentIndex;
 }
 
 void FenetrePrincipale::afficherMenuPause()
 {
+	int memCurrentIndex = currentIndex();
 	printf("FenetrePrincipale");
 	setCurrentWidget(menuPause);
+	lastWidgetId = memCurrentIndex;
 }
 
 void FenetrePrincipale::afficherInstructions()
 {
+	int memCurrentIndex = currentIndex();
 	printf("FenetrePrincipale::afficherInstructions");
 	setCurrentWidget(instructions);
+	lastWidgetId = memCurrentIndex;
 }
 
 void FenetrePrincipale::demarrerNouvellePartie()
 {
+	int memCurrentIndex = currentIndex();
+	lastWidgetId = memCurrentIndex;
 }
 
 void FenetrePrincipale::afficherMenuPrincipal()
 {
+	int memCurrentIndex = currentIndex();
 	setCurrentWidget(menuPrincipal);
+	lastWidgetId = memCurrentIndex;
+}
+
+void FenetrePrincipale::retour() {
+	int memCurrentIndex = currentIndex();
+	setCurrentIndex(lastWidgetId);
+	lastWidgetId = memCurrentIndex;
 }
 

@@ -9,7 +9,7 @@ public:
 	Instructions(FenetrePrincipale * parent = nullptr);
 
 private slots:
-	void quitter();
+	void retour();
 	
 private:
 	void createMenu();
