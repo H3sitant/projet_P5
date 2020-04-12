@@ -92,7 +92,8 @@ void Personnage::deplacer(int direction, int largeur)
 	}
 	
 	for(Condiment* c : condiments) {
-        c->setPositionX(x());
+		if (c->getSorte()==Condiment::PAIN_B) c->setPositionX(x()+10);
+		else c->setPositionX(x());
 	}
 }
 size_t Personnage::getHauteurBurger()
