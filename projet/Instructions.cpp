@@ -12,21 +12,27 @@ Instructions::Instructions(FenetrePrincipale *parent)
 	QVBoxLayout *mainLayout = new QVBoxLayout;
 	QGridLayout *gridcommande = new QGridLayout;
 	QGridLayout *grid = new QGridLayout;
+	QWidget *instructionsJeu = new QWidget();
+	instructionsJeu->setLayout(grid);
+	QPalette pal = QPalette();
+	pal.setColor(QPalette::Background, QColor(0, 0, 0, 100));
+	instructionsJeu->setAutoFillBackground(true);
+	instructionsJeu->setPalette(pal);
 
 	directives = new QLabel("Attrapez les ingredients pour creer des burgers!");
 	directives->setAlignment(Qt::AlignCenter);
-	commandes = new QLabel("Touches de commande");
+	commandes = new QLabel("Controles");
 	commandes->setAlignment(Qt::AlignCenter);
-	gauche = new QLabel("Deplacement a gauche");
-	droite = new QLabel("Deplacement a droite");
-	pause = new QLabel("Mettre le jeu en pause");
+	gauche = new QLabel("Gauche");
+	droite = new QLabel("Droite");
+	pause = new QLabel("Pause");
 	powerups = new QLabel("Objets speciaux");
 	powerups->setAlignment(Qt::AlignCenter);
-	arc = new QLabel("Tous les ingredients deviennent ceux dont vous avez besoin pendant un certain temps");
+	arc = new QLabel("Tous les ingredients deviennent ceux dont vous avez\nbesoin pendant un certain temps");
 	potion = new QLabel("Permet de retirer le dernier element du burger");
 	etoile = new QLabel("Deplacement plus rapide");
 	corona = new QLabel("Deplacement plus lent");
-	quitterI = new QPushButton("Quitter");
+	quitterI = new QPushButton("Retour");
 	
 	QLabel *imageBurger = new QLabel();
 	imageBurger->setAlignment(Qt::AlignCenter);
@@ -40,16 +46,21 @@ Instructions::Instructions(FenetrePrincipale *parent)
 
 
 	QPixmap pixmap(":/images/Burger_Complet.png");
-	//hamburger.fill();
 	imageBurger->setPixmap(pixmap.scaled(100,100,Qt::KeepAspectRatio));
 	pixmap.load(":/images/Fleche_Gauche.png");
 	imageGauche->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
-	imageDroite->setPixmap(pixmap);
-	imagePause->setPixmap(pixmap);
-	imageArc->setPixmap(pixmap);
-	imagePotion->setPixmap(pixmap);
-	imageEtoile->setPixmap(pixmap);
-	imageCorona->setPixmap(pixmap);
+	pixmap.load(":/images/Fleche_Droite.png");
+	imageDroite->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+	pixmap.load(":/images/Bouton_Pause.png");
+	imagePause->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+	pixmap.load(":/images/Rainbow.png");
+	imageArc->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+	pixmap.load(":/images/Potion.png");
+	imagePotion->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+	pixmap.load(":/images/etoile.png");
+	imageEtoile->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+	pixmap.load(":/images/Covid.png");
+	imageCorona->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
 
 	this->setLayout(mainLayout);
 
@@ -58,17 +69,21 @@ Instructions::Instructions(FenetrePrincipale *parent)
 	
 	mainLayout->addStretch();
 	mainLayout->addWidget(commandes);
+	mainLayout->addSpacing(10);
 	mainLayout->addLayout(gridcommande);
-	gridcommande->addWidget(gauche, 0, 0, Qt::AlignCenter);
-	gridcommande->addWidget(droite, 0, 1, Qt::AlignCenter);
-	gridcommande->addWidget(pause, 0, 2, Qt::AlignCenter);
-	gridcommande->addWidget(imageGauche, 1, 0, Qt::AlignCenter);
-	gridcommande->addWidget(imageDroite, 1, 1, Qt::AlignCenter);
-	gridcommande->addWidget(imagePause, 1, 2, Qt::AlignCenter);
+	gridcommande->addWidget(gauche, 1, 0, Qt::AlignCenter);
+	gridcommande->addWidget(droite, 1, 1, Qt::AlignCenter);
+	gridcommande->addWidget(pause, 1, 2, Qt::AlignCenter);
+	gridcommande->addWidget(imageGauche, 0, 0, Qt::AlignCenter);
+	gridcommande->addWidget(imageDroite, 0, 1, Qt::AlignCenter);
+	gridcommande->addWidget(imagePause, 0, 2, Qt::AlignCenter);
 
 	mainLayout->addStretch();
+	mainLayout->addSpacing(20);
 	mainLayout->addWidget(powerups);
-	mainLayout->addLayout(grid);
+	mainLayout->addSpacing(10);
+	mainLayout->addWidget(instructionsJeu);
+	
 	grid->addWidget(imageArc, 0, 0, Qt::AlignCenter);
 	grid->addWidget(arc, 0, 1);
 	grid->addWidget(imagePotion, 1, 0, Qt::AlignCenter);
@@ -78,16 +93,17 @@ Instructions::Instructions(FenetrePrincipale *parent)
 	grid->addWidget(imageCorona, 3, 0, Qt::AlignCenter);
 	grid->addWidget(corona, 3, 1);
 	mainLayout->addStretch();
+	mainLayout->addSpacing(20);
 	mainLayout->addWidget(quitterI);
 	createMenu();
 }
 
-void Instructions::quitter() {
-	printf("quitter");
-	parent->afficherMenuPrincipal();
+void Instructions::retour() {
+	printf("Retour");
+	parent->retour();
 }
 
 
 void Instructions::createMenu() {
-	connect(quitterI, &QPushButton::clicked, this, &Instructions::quitter);
+	connect(quitterI, &QPushButton::clicked, this, &Instructions::retour);
 }
