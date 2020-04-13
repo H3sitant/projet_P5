@@ -120,7 +120,7 @@ void PanneauCentral::CheckPosition()
 						player->ajouterCondiment(c);
 					}
 				}
-				/*else if (coronaVirusMode & c->getPositionY() == int(HAUTEUR / 2)) {//Les éléments qui passent la moitié de l'écran on des chances de se transformer en virus
+				/*else if (coronaVirusMode & c->getPositionY() == int(HAUTEUR / 2)) {//Les ï¿½lï¿½ments qui passent la moitiï¿½ de l'ï¿½cran on des chances de se transformer en virus
 					if (rand() % PROB_CORONA == 0) {
 						Condiment* contaminedCondiment = new Powerup(Powerup::CORONA, c->getPosition());
 						FallingCondiments.push_back(contaminedCondiment);
@@ -184,8 +184,7 @@ void PanneauCentral::verifierPowerups() {
 	}
 }
 
-void PanneauCentral::activerRainbow() {
-	
+void PanneauCentral::activerRainbow() {	
 	int i = 0;
 	bool pileIsGood = true;
 	Condiment::SorteCondiment condimentVoulu;
@@ -219,11 +218,11 @@ void PanneauCentral::activerRainbow() {
 
 void PanneauCentral::activerPower(Condiment *powerup)
 {
-	cout << "Powerup activé!";
-	//TODO Coder les différentes effets des powerups
+	cout << "Powerup activï¿½!";
+	//TODO Coder les diffï¿½rentes effets des powerups
 	switch (powerup->getSortePow()) {
 	case Powerup::STAR:
-		//powerUpActif = Déplacement plus rapide
+		//powerUpActif = Dï¿½placement plus rapide
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
 		cout << "Activer powerUp : Star";
 		player->setmovementSpeed(20);
@@ -235,13 +234,18 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		//powerUpActif = Toujours le bon item
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
 		cout << "Activer powerUp : Rainbow";
+		if (powerUpActif == 'S')
+		{
+			player->setmovementSpeed(10);
+			largeurCapter = 10;
+		}
 		powerUpActif = 'R';
 		tempsRestantPowerup = 200;
 		activerRainbow();
 		break;
 	case Powerup::POTION:
 		//Retire le dernier condiment de la pile du joueur
-		//Powerup de type passif -> application immédiate
+		//Powerup de type passif -> application immï¿½diate
 		if (player->getBurger()->getCondiments().size() > 1) {
 			scene->removeItem(player->getBurger()->getCondiments().back());
 			player->retirerTop();
@@ -249,7 +253,7 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		cout << "Activer powerUp : Potion";
 		break;
 	case Powerup::CORONA:
-		//Le corona fait le bordel et mélange le burger constitué
+		//Le corona fait le bordel et mï¿½lange le burger constituï¿½
 		if (player->getBurger()->getCondiments().size() > 2) {
 			player->getBurger()->mixBurger();
 		}
