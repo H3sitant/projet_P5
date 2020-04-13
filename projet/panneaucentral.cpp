@@ -181,32 +181,7 @@ void PanneauCentral::verifierPowerups() {
 	}
 }
 
-void PanneauCentral::activerRainbow() {
-	
-	/*Condiment *newFallingC = new Condiment();
-	if (player->getBurger()->getCondiments().size() < commande->getCondiments().size())
-	{
-		newFallingC->setSorte(recette[player->getBurger()->getCondiments().size()].getSorte());
-	}
-	else
-	{
-		newFallingC->setSorte(Condiment::POWERUP);
-		/*int i = rand() % 2;
-		if(i==0) newFallingC->setSortePow(Condiment::POTION);
-		else newFallingC->setSortePow(Condiment::CORONA);
-	}
-	newFallingC->setFalling(true);
-	newFallingC->setPos(rand() % LARGEUR - 50, 0);
-	//newFallingC->setPos(player->x(), 0);
-	FallingCondiments.push_back(newFallingC);
-	if (newFallingC->getSorte() == Condiment::POWERUP)
-	{
-		newFallingC->setScale(0.5);
-		if (newFallingC->getSortePow() == Powerup::RAINBOW)newFallingC->setOffset({ 45,-20 });
-		else newFallingC->setOffset({ 50,-50 });
-	}
-	scene->addItem(newFallingC);*/
-	
+void PanneauCentral::activerRainbow() {	
 	int i = 0;
 	bool pileIsGood = true;
 	Condiment::SorteCondiment condimentVoulu;
@@ -256,6 +231,11 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		//powerUpActif = Toujours le bon item
 		//tempsRestantPowerup = TEMPS_MAX_POWERUP;
 		cout << "Activer powerUp : Rainbow";
+		if (powerUpActif == 'S')
+		{
+			player->setmovementSpeed(10);
+			largeurCapter = 10;
+		}
 		powerUpActif = 'R';
 		tempsRestantPowerup = 200;
 		activerRainbow();
