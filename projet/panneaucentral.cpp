@@ -107,6 +107,16 @@ void PanneauCentral::CheckPosition()
 							FallingCondiments.remove(c2);
 							delete c2;
 						}
+						//Victoire si vrai
+						int i=0;
+						for (Condiment* c : player->getCondiments())
+						{
+							if (c->getSorte() != recette[i].getSorte())
+							{
+								victoire = false;
+							}
+							i++;
+						}
 					}
 					else
 					{

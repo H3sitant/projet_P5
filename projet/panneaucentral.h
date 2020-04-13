@@ -51,6 +51,7 @@ private:
 	static const int PROB_CORONA = 5;
 	int largeurCapter = 10;
 	int tailleRecette;
+	bool victoire = true;
 };
 
 #endif // PANNEAUCENTRAL_H
