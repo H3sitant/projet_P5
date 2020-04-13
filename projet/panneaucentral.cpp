@@ -55,7 +55,7 @@ void PanneauCentral::FC()
 	FallingCondiments.push_back(newFallingC);
 	if (newFallingC->getSorte() == Condiment::POWERUP)
 	{
-		newFallingC->setScale(0.5);
+		//newFallingC->setScale(0.5);
 		if (newFallingC->getSortePow() == Powerup::RAINBOW)newFallingC->setOffset({ 45,-20 });
 		else newFallingC->setOffset({ 50,-50 });	
 	}
@@ -67,8 +67,7 @@ void PanneauCentral::CheckPosition()
 	delayFalling++;
 	if (delayFalling == DelayFall)
 	{
-		if (powerUpActif == 'R') activerRainbow();
-		else FC();
+		FC();
 		delayFalling = 0;
 	}
 	if (!FallingCondiments.empty()) {
@@ -166,9 +165,14 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
 //================================================
 void PanneauCentral::verifierPowerups() {
 	tempsRestantPowerup--;
+
+	if (powerUpActif == 'R') {
+		activerRainbow();
+	}
+
 	if (tempsRestantPowerup <= 0)
 	{
-		if (powerUpActif = 'S')
+		if (powerUpActif == 'S')
 		{
 			player->setmovementSpeed(10);
 			largeurCapter = 10;
@@ -179,8 +183,8 @@ void PanneauCentral::verifierPowerups() {
 
 void PanneauCentral::activerRainbow() {
 	
-	Condiment *newFallingC = new Condiment();
-	if (player->getBurger()->getCondiments().size() < tailleRecette)
+	/*Condiment *newFallingC = new Condiment();
+	if (player->getBurger()->getCondiments().size() < commande->getCondiments().size())
 	{
 		newFallingC->setSorte(recette[player->getBurger()->getCondiments().size()].getSorte());
 	}
@@ -189,7 +193,7 @@ void PanneauCentral::activerRainbow() {
 		newFallingC->setSorte(Condiment::POWERUP);
 		/*int i = rand() % 2;
 		if(i==0) newFallingC->setSortePow(Condiment::POTION);
-		else newFallingC->setSortePow(Condiment::CORONA);*/
+		else newFallingC->setSortePow(Condiment::CORONA);
 	}
 	newFallingC->setFalling(true);
 	newFallingC->setPos(rand() % LARGEUR - 50, 0);
@@ -201,7 +205,37 @@ void PanneauCentral::activerRainbow() {
 		if (newFallingC->getSortePow() == Powerup::RAINBOW)newFallingC->setOffset({ 45,-20 });
 		else newFallingC->setOffset({ 50,-50 });
 	}
-	scene->addItem(newFallingC);
+	scene->addItem(newFallingC);*/
+	
+	int i = 0;
+	bool pileIsGood = true;
+	Condiment::SorteCondiment condimentVoulu;
+	for (Condiment *c : player->getBurger()->getCondiments()) {
+		if (c->getSorte() != commande->getCondiments()[i]->getSorte()) {
+			pileIsGood = false;
+		}
+		i++;
+	}
+	//list<Condiment*> newFalling;
+	if (pileIsGood) {
+		condimentVoulu = commande->getCondiments()[i]->getSorte();
+		for (Condiment *c : FallingCondiments) {
+			c->setSorte(condimentVoulu);
+		}
+	}
+	else //On transforme les condiments en potion pour permettre au joueur de corriger ses erreurs
+	{
+		for (Condiment* c : FallingCondiments) {
+			c->setSorte(Condiment::POWERUP);
+			//c->setScale(0.5);
+			c->setSortePow(Condiment::POTION);
+			//newC->setPos(c->pos());
+			//newFalling.push_back(newC);
+
+		}
+	}
+
+	//FallingCondiments = newFalling;
 }
 
 void PanneauCentral::activerPower(Condiment *powerup)
@@ -243,6 +277,7 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		cout << "Activer powerUp : Covid";
 		break;
 	default:
-		throw (invalid_argument("Type de powerup non pris en charge"));
+		//throw (invalid_argument("Type de powerup non pris en charge"));
+		break;
 	}
 }

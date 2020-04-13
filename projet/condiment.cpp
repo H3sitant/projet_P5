@@ -59,7 +59,8 @@ void Condiment::setSorte(SorteCondiment sorte)
 		imagePath += "Fromage.png";
 		break;
 	case Condiment::POWERUP:
-		imagePath += setSortePow(static_cast<SortePowerup>(rand() % last));
+		// image est définis dans setSortePow
+		setSortePow(static_cast<SortePowerup>(rand() % last));
 		//imagePath += setSortePow(SortePowerup::RAINBOW);
 		break;
 	default:
@@ -67,7 +68,7 @@ void Condiment::setSorte(SorteCondiment sorte)
 		break;
 		
 	}
-	setPixmap(QPixmap(imagePath.c_str()));
+	if (sorte != Condiment::POWERUP) setPixmap(QPixmap(imagePath.c_str()));
 }
 
 bool Condiment::operator==(const Condiment& c) const
@@ -119,28 +120,29 @@ double Condiment::getPositionY()
 //power up
 //================================================================
 
-string Condiment::setSortePow(SortePowerup sorte) {
+void Condiment::setSortePow(SortePowerup sorte) {
 	sortePow = sorte;
-	string Path;
+	string imagePath = ":/images/";
 	switch (sorte) {
 	case RAINBOW:
-		Path = "Petit_Rainbow.png";
+		imagePath += "Petit_Rainbow.png";
 		break;
 	case CORONA:
-		Path = "Petit_Covid.png";
+		imagePath += "Petit_Covid.png";
 		break;
 	case POTION:
-		Path = "Petite_Potion.png";
+		imagePath += "Petite_Potion.png";
 		break;
 	case STAR:
-		Path = "Petite_etoile.png";
+		imagePath += "Petite_etoile.png";
 		break;
 	default:
-		Path = "Erreur.png";
+		imagePath += "Erreur.png";
 		break;
 		
 	}
-	return Path;
+	setPixmap(QPixmap(imagePath.c_str()).scaled(50,50,Qt::KeepAspectRatio));
+
 }
 enum Condiment::SortePowerup Condiment::getSortePow() {
 	return sortePow;
