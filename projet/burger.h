@@ -19,6 +19,8 @@ public:
 	void retirerTop();
 	QPixmap getBurgerPixmap();
 	void viderBurger();
+
+	bool operator==( Burger other);
 	
 private:
 	vector<Condiment*> condiments;

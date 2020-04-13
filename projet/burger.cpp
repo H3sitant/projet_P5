@@ -60,10 +60,10 @@ void Burger::mixBurger()
 
 }
 
-static bool operator==(Burger lhs, Burger rhs) {
-	if (lhs.getCondiments().size() == rhs.getCondiments().size()) {
-		for (int i = 0; i < lhs.getCondiments().size(); i++) {
-			if(lhs.getCondiments()[i]->getSorte() != rhs.getCondiments()[i]->getSorte()) return false;
+ bool Burger::operator==( Burger other) {
+	if (this->getCondiments().size() == other.getCondiments().size()) {
+		for (int i = 0; i < this->getCondiments().size(); i++) {
+			if(this->getCondiments()[i]->getSorte() != other.getCondiments()[i]->getSorte()) return false;
 		}
 		return true;
 	}

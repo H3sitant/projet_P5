@@ -108,14 +108,8 @@ void PanneauCentral::CheckPosition()
 							delete c2;
 						}
 						//Victoire si vrai
-						int i=0;
-						for (Condiment* c : player->getCondiments())
-						{
-							if (c->getSorte() != recette[i].getSorte())
-							{
-								victoire = false;
-							}
-							i++;
+						if (*player->getBurger() == *commande) {
+							victoire = true;
 						}
 					}
 					else
