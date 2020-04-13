@@ -3,6 +3,7 @@
 #include "fenetrejeu.h"
 #include "pause.h"
 #include "instructions.h"
+#include "MenuFinPartie.h"
 
 FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 {
@@ -10,10 +11,14 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 	menuPrincipal = new Menu(this);
 	menuPause = new Pause(this);
 	instructions = new Instructions(this);
+	finPartie = new  MenuFinPartie(this);
+	setFixedSize(1600, 900);
 	addWidget(jeu);
 	addWidget(menuPrincipal);
 	addWidget(menuPause);
 	addWidget(instructions);
+	addWidget(finPartie);
+	finPartie->setStyleSheet("background-color: rgba(0,0,0,0) ");
 	setCurrentWidget(menuPrincipal);
 
 }
@@ -45,6 +50,13 @@ void FenetrePrincipale::demarrerNouvellePartie()
 {
 	int memCurrentIndex = currentIndex();
 	lastWidgetId = memCurrentIndex;
+}
+
+void FenetrePrincipale::afficherFinPartie(bool victoire)
+{
+	int memCurrentIndex = currentIndex();
+	finPartie->setVictoire(victoire);
+	setCurrentWidget(finPartie);
 }
 
 void FenetrePrincipale::afficherMenuPrincipal()

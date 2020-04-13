@@ -3,6 +3,7 @@
 #define FENETREPRINCIPALE_H
 
 #include <QStackedWidget>
+#include "MenuFinPartie.h"
 
 
 class FenetrePrincipale : public QStackedWidget
@@ -17,12 +18,14 @@ public:
 	void afficherMenuPause();
 	void afficherInstructions();
 	void demarrerNouvellePartie();
+	void afficherFinPartie(bool victoire);
 
 private:
 	QWidget *jeu;
 	QWidget* menuPrincipal;
 	QWidget* menuPause;
 	QWidget* instructions;
+	MenuFinPartie* finPartie;
 	int lastWidgetId=0;
 
 };

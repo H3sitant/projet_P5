@@ -34,6 +34,7 @@ public slots:
 	 void FC();
 
 private:
+	FenetreJeu *parent;
 	Burger* commande;
     QGraphicsScene* scene;
     //void resizeEvent(QResizeEvent *event);
@@ -51,7 +52,7 @@ private:
 	static const int PROB_CORONA = 5;
 	int largeurCapter = 10;
 	int tailleRecette;
-	bool victoire = true;
+	bool victoire;
 };
 
 #endif // PANNEAUCENTRAL_H

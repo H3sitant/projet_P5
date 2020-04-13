@@ -55,6 +55,10 @@ void FenetreJeu::pause(){
 	parent->afficherMenuPause();
 }
 
+void FenetreJeu::finPartie(bool victoire) {
+	parent->afficherFinPartie(victoire);
+}
+
 void FenetreJeu::genererCommande(int nbrItem) {
 	if (nbrItem>= 2){
 		commande->viderBurger();

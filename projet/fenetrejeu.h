@@ -14,6 +14,8 @@ public:
 	FenetreJeu(FenetrePrincipale * parent=nullptr);
 	~FenetreJeu();
 
+	void finPartie(bool victoire);
+
 	void genererCommande(int nbrItem=5);
 
 public slots:
