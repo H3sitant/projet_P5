@@ -2,13 +2,14 @@
 #include "condiment.h"
 #include <list>
 #include <QGraphicsPixmapItem>
+#include "burger.h"
 using namespace std;
 class Personnage: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
 	int position;
-	list<Condiment*> condiments;
+	Burger* burger;
 	double Hight;
 	int moveSpeed=10;
 
@@ -17,10 +18,9 @@ public:
 	~Personnage();
 	int getPosition();
 	void setPosition(int newPosition);
-	list<Condiment*> getCondiments();
+	Burger* getBurger();
 	void retirerTop();
-	void mixBurger();
-	void setCondiments(list<Condiment*> condiments);
+	void setBurger(Burger burger);
 	void deplacer(int direction, int largeur);
     size_t getHauteurBurger();
 	char toString();

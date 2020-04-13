@@ -1,8 +1,11 @@
 #include "panneaugauche.h"
 
 
-PanneauGauche::PanneauGauche(QMainWindow *parent) : QWidget(parent)
+PanneauGauche::PanneauGauche(Burger *commande, QWidget *parent) : QWidget(parent)
 {
+	
+	this->commande = commande;
+
 layoutPanneauGauche = new QVBoxLayout();
 this->setLayout(layoutPanneauGauche);
 
@@ -25,19 +28,9 @@ layoutVies->addWidget(coeur2);
 layoutVies->addWidget(coeur3);
 vies->setLayout(layoutVies);
 
-Burger commande;
-commande.ajouterCondiment(new Condiment(Condiment::PAIN_B, { 0,0 }));
-//commande.ajouterCondiment(new Condiment(Point{ 0, 0 }));
-commande.ajouterCondiment(new Condiment(Condiment::FROMAGE, { 0,0 }));
-commande.ajouterCondiment(new Condiment(Condiment::BOULETTE, { 0,0 }));
-
-commande.ajouterCondiment(new Condiment(Condiment::OIGNON, { 0,0 }));
-commande.ajouterCondiment(new Condiment(Condiment::LAITUE, { 0,0 }));
-commande.ajouterCondiment(new Condiment(Condiment::TOMATE, { 0,0 }));
-commande.ajouterCondiment(new Condiment(Condiment::PAIN_H, { 0,0 }));
 
 labelImageBurger = new QLabel();
-dessinerCommande(commande);
+dessinerCommande();
 
 QLabel *temps = new QLabel();
 temps->setText(tr("TEMPS: 180"));
@@ -50,19 +43,15 @@ layoutPanneauGauche->addWidget(temps);
 layoutPanneauGauche->addWidget(labelImageBurger);
 layoutPanneauGauche->addStretch();
 
-
-
-dessinerCommande(commande);
-
 }
 
 void PanneauGauche::updateTemps(int temps){
 
 }
 
-void PanneauGauche::dessinerCommande(Burger commande) {
+void PanneauGauche::dessinerCommande() {
 	QPixmap imageCadre(":/images/Case_Bleue.png");
-	QPixmap imageBurger = commande.getBurgerPixmap().scaled(imageCadre.width() - 160, imageCadre.height() - 160, Qt::KeepAspectRatio);
+	QPixmap imageBurger = commande->getBurgerPixmap().scaled(imageCadre.width() - 160, imageCadre.height() - 160, Qt::KeepAspectRatio);
 	QPainter painter(&imageCadre);
 	painter.drawPixmap(imageCadre.width() / 2 - imageBurger.width() / 2, imageCadre.height() / 2 - imageBurger.height() / 2, imageBurger);
 	labelImageBurger->setPixmap(imageCadre.scaledToWidth(150));

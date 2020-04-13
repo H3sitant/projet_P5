@@ -5,7 +5,7 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QPainter>
-#include <list>
+#include <vector>
 #include "Condiment.h"
 
 class Burger 
@@ -14,9 +14,14 @@ class Burger
 public:
     Burger();
 	void ajouterCondiment(Condiment * condiment);
+	vector<Condiment*> getCondiments();
+	void mixBurger();
+	void retirerTop();
 	QPixmap getBurgerPixmap();
+	void viderBurger();
+	
 private:
-	list<Condiment*> condiments;
+	vector<Condiment*> condiments;
 };
 
 #endif // BURGER_H

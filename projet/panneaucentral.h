@@ -5,6 +5,8 @@
 #include "Powerup.h"
 #include "Condiment.h"
 #include <QTimer>
+#include "burger.h"
+#include "fenetrejeu.h"
 
 
 #define Grosseur_liste 20
@@ -17,8 +19,7 @@ class PanneauCentral : public QGraphicsView
 {
 	Q_OBJECT
 public:
-    PanneauCentral();
-	void SetRecette();
+    PanneauCentral(Burger *commande, FenetreJeu*parent = nullptr);
     const int LARGEUR = 500;
     const int HAUTEUR = 500;
 	void verifierPowerups();
@@ -33,6 +34,7 @@ public slots:
 	 void FC();
 
 private:
+	Burger* commande;
     QGraphicsScene* scene;
     //void resizeEvent(QResizeEvent *event);
     Personnage *player;

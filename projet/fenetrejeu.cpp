@@ -9,13 +9,15 @@
 FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
 {
 	this->parent = parent;
+	commande = new Burger();
+	genererCommande();
     mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(0,0,0,0);
 
-    panneauCentral = new PanneauCentral();
+    panneauCentral = new PanneauCentral(commande,this);
     panneauCentral->setStyleSheet("background-color: rgba(0,0,0,0) ");
 
-    panneauGauche = new PanneauGauche();
+    panneauGauche = new PanneauGauche(commande, this);
     panneauDroite = new PanneauDroite(this);
 
 
@@ -23,7 +25,7 @@ FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
     mainLayout->addWidget(panneauCentral);
     mainLayout->addWidget(panneauDroite);
 
-
+	
 
     QPalette pal = QPalette();
     pal.setColor(QPalette::Background, QColor(0,0,0,100));
@@ -51,4 +53,19 @@ FenetreJeu::~FenetreJeu()
 void FenetreJeu::pause(){
 	printf("FenetreJeu::pause");
 	parent->afficherMenuPause();
+}
+
+void FenetreJeu::genererCommande(int nbrItem) {
+	if (nbrItem>= 2){
+		commande->viderBurger();
+		commande->ajouterCondiment(new Condiment(Condiment::PAIN_B, { 0,0 }));
+		for (int i = 0; i < nbrItem - 2; i++) {
+			Condiment * nextCondiment ;
+			do {
+				nextCondiment = new Condiment;
+			} while (nextCondiment->getSorte() == Condiment::PAIN_B || nextCondiment->getSorte() == Condiment::PAIN_H || nextCondiment->getSorte() == Condiment::POWERUP); // à optimiser, peut prendre du temps
+			commande->ajouterCondiment(nextCondiment);
+		}
+		commande->ajouterCondiment(new Condiment(Condiment::PAIN_H, { 0,0 }));
+	}
 }

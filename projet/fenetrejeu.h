@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include "FenetrePrincipale.h"
+#include "burger.h"
 
 class FenetreJeu : public QWidget
 {
@@ -12,6 +13,8 @@ class FenetreJeu : public QWidget
 public:
 	FenetreJeu(FenetrePrincipale * parent=nullptr);
 	~FenetreJeu();
+
+	void genererCommande(int nbrItem=5);
 
 public slots:
      void pause();
@@ -24,5 +27,6 @@ private:
     QWidget *panneauCentral;
     QBasicTimer *timer;
 	FenetrePrincipale * parent;
+	Burger *commande;
 };
 #endif // FENETREJEU_H

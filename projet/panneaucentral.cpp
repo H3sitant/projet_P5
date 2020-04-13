@@ -7,10 +7,11 @@
 using namespace std;
 
 
-PanneauCentral::PanneauCentral()
+PanneauCentral::PanneauCentral(Burger *commande, FenetreJeu *parent): QGraphicsView(parent)
 {
+	this->commande = commande;
 	finduJeux = false;
-	tailleRecette = Grosseur_liste;
+	tailleRecette = commande->getCondiments().size();
 	delayFalling = 0;
 	//FallingCondiments = new list<Condiment*>;
     scene = new QGraphicsScene(this);
@@ -40,23 +41,10 @@ PanneauCentral::PanneauCentral()
     /*QPalette pal = QPalette();
     pal.setColor(QPalette::Background, QColor(0,0,0,0));
     scene->setPalette(pal);*/
-	SetRecette();
 	
 	timer = new QTimer();
 	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(CheckPosition()));
 	timer->start(50);
-}
-
-void PanneauCentral::SetRecette() {
-	for (int i = 0; i < tailleRecette; i++)
-	{
-		//Permet de s'assurer qu'aucun pain n'est généré.. pourrait être amélioré car peut prendre du temps
-		do {
-			recette[i] = Condiment(Point());
-		} while (recette[i].getSorte() == Condiment::PAIN_H );
-	}
-	//Le dernier ingrédient est un pain
-	recette[tailleRecette - 1] = Condiment(Condiment::PAIN_H);
 }
 
 void PanneauCentral::FC()
@@ -108,7 +96,7 @@ void PanneauCentral::CheckPosition()
 				{
 					c->setFalling(false);
 					FallingCondiments.remove(c);
-					if (c->getSorte() == Condiment::PAIN_H)
+					if (c->getSorte() == Condiment::PAIN_H  )
 					{
 						finduJeux = true;
 						timer->stop();
@@ -122,6 +110,7 @@ void PanneauCentral::CheckPosition()
 					}
 					else
 					{
+						
 						player->ajouterCondiment(c);
 					}
 				}
@@ -187,9 +176,9 @@ void PanneauCentral::verifierPowerups() {
 void PanneauCentral::activerRainbow() {
 	
 	Condiment *newFallingC = new Condiment();
-	if (player->getCondiments().size() < tailleRecette)
+	if (player->getBurger()->getCondiments().size() < tailleRecette)
 	{
-		newFallingC->setSorte(recette[player->getCondiments().size()].getSorte());
+		newFallingC->setSorte(recette[player->getBurger()->getCondiments().size()].getSorte());
 	}
 	else
 	{
@@ -236,15 +225,16 @@ void PanneauCentral::activerPower(Condiment *powerup)
 	case Powerup::POTION:
 		//Retire le dernier condiment de la pile du joueur
 		//Powerup de type passif -> application immédiate
-		if (player->getCondiments().size() > 1) {
+		if (player->getBurger()->getCondiments().size() > 1) {
+			scene->removeItem(player->getBurger()->getCondiments().back());
 			player->retirerTop();
 		}
 		cout << "Activer powerUp : Potion";
 		break;
 	case Powerup::CORONA:
 		//Le corona fait le bordel et mélange le burger constitué
-		if (player->getCondiments().size() > 2) {
-			player->mixBurger();
+		if (player->getBurger()->getCondiments().size() > 2) {
+			player->getBurger()->mixBurger();
 		}
 		cout << "Activer powerUp : Covid";
 		break;

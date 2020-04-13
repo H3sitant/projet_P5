@@ -16,7 +16,7 @@ Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsP
 Condiment::Condiment(Point p) {
 	setPositionY(p.y);
 	setPositionX(p.x);
-	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP+1)));
+	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP)));
 }
 
 Condiment::Condiment(SorteCondiment sorte, Point position) {

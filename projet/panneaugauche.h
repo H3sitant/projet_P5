@@ -7,10 +7,9 @@ class PanneauGauche : public QWidget
 {
     Q_OBJECT
 public:
-	PanneauGauche(QMainWindow * parent=nullptr);
+	PanneauGauche(Burger *commande, QWidget * parent=nullptr);
     void setPointage(int pointage);
     void setNbrVies(int nbr);
-	void dessinerCommande(Burger commande);
 
 public slots:
     void updateTemps(int temps);
@@ -21,8 +20,10 @@ private:
     QTimer *timer;
     QVBoxLayout *layoutPanneauGauche;
 	QLabel* labelImageBurger;
+	Burger*commande;
 	
-	
+
+	void dessinerCommande();
 
 };
 
