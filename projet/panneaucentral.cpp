@@ -184,7 +184,8 @@ void PanneauCentral::verifierPowerups() {
 	}
 }
 
-void PanneauCentral::activerRainbow() {	
+void PanneauCentral::activerRainbow() {
+	
 	int i = 0;
 	bool pileIsGood = true;
 	Condiment::SorteCondiment condimentVoulu;
