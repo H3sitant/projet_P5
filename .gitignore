@@ -28,3 +28,5 @@ projet/Makefile
 projet/Makefile.Debug
 
 projet/Makefile.Release
+
+*.zip
