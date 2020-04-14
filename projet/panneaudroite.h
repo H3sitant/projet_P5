@@ -2,20 +2,27 @@
 #define PANNEAUDROITE_H
 #include <QtWidgets>
 #include "Powerup.h"
-#include "fenetrejeu.h"
 
 class PanneauDroite : public QWidget
 
 {
     Q_OBJECT
 public:
-    PanneauDroite(FenetreJeu * parent=nullptr);
-	void dessinerPowerup(const Powerup & powerup);
+    PanneauDroite(QWidget * parent=nullptr);
 
-public slots:
+	int getTempsPowerup();
 
-    void endPowerup();
+	void setPowerupActif(Condiment * powerup);
+	void diminuerTempsPowerup();
+	void viderCase();
+	void reset();
 
+public slots: 
+	void slotBoutonMenu();
+
+signals:
+	void boutonMenuClicked();
+	void finPowerupSignal();
 
 
 private:
@@ -25,7 +32,14 @@ private:
     QLabel *labelPowerup;
     QLabel *labelImagePowerup;
     QLabel *labelTempsPowerup;
-	FenetreJeu *parent;
+
+	void setTempsPowerup(int temps);
+	void dessinerPowerup(Condiment * powerup);
+	void ecrirePowerup(string sorte);
+	void finPowerup();
+	int temps;
 };
 
 #endif // PANNEAUDROITE_H
+
+

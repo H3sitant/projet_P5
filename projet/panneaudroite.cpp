@@ -1,8 +1,7 @@
 #include "panneaudroite.h"
 
-PanneauDroite::PanneauDroite(FenetreJeu*parent): QWidget(parent)
+PanneauDroite::PanneauDroite(QWidget*parent): QWidget(parent)
 {
-	this->parent = parent;
     layoutPanneauDroite = new QVBoxLayout();
     this->setLayout(layoutPanneauDroite);
 
@@ -23,13 +22,13 @@ PanneauDroite::PanneauDroite(FenetreJeu*parent): QWidget(parent)
     boutonMenu->setText("");
     boutonMenu->setLayout(boutonMenuLayout);
     boutonMenu->setStyleSheet("qproperty-alignment: AlignRight;");
-	connect(boutonMenu, &QPushButton::clicked, this->parent, &FenetreJeu::pause);
+	connect(boutonMenu, &QPushButton::clicked, this, &PanneauDroite::slotBoutonMenu);
 
     labelPowerup = new QLabel(tr("POWERUP ACTIF: \n AUCUN"),this);
 	labelImagePowerup = new QLabel();
-	Powerup  p(Powerup::CORONA, { 0,0 });
+
 	
-	dessinerPowerup(p);
+	viderCase();
     labelTempsPowerup = new QLabel(tr("TEMPS POWERUP: \n 0"),this);
 
 
@@ -44,14 +43,61 @@ PanneauDroite::PanneauDroite(FenetreJeu*parent): QWidget(parent)
 
 }
 
-
-void PanneauDroite::endPowerup(){
-
+void PanneauDroite::reset() {
+	viderCase();
+	setTempsPowerup(0);
+	ecrirePowerup("AUCUN");
 }
-void PanneauDroite::dessinerPowerup(const Powerup &powerup) {
+
+void PanneauDroite::slotBoutonMenu() {
+	emit boutonMenuClicked();
+}
+
+void PanneauDroite::setPowerupActif( Condiment* powerup) {
+	setTempsPowerup(10);
+	dessinerPowerup(powerup);
+	QString powerupActif("POWERUP ACTIF : \n");
+	ecrirePowerup(powerup->toString());
+}
+
+void PanneauDroite::diminuerTempsPowerup()
+{
+	if (--temps <= 0) {
+		temps = 0;
+		finPowerup();
+	}
+	setTempsPowerup(temps);
+}
+
+void PanneauDroite::ecrirePowerup(string sorte) {
+	labelPowerup->setText(tr("POWERUP ACTIF: \n") + QString(sorte.c_str()));
+}
+
+void PanneauDroite::finPowerup() {
+	viderCase();
+	ecrirePowerup("AUCUN");
+	emit finPowerupSignal();
+}
+
+void PanneauDroite::setTempsPowerup(int temps){
+	this->temps = temps;
+	labelTempsPowerup->setText(tr("TEMPS POWERUP: \n ") + QString::number(temps));
+	
+}
+
+int PanneauDroite::getTempsPowerup() {
+	return temps;
+}
+void PanneauDroite::dessinerPowerup( Condiment *powerup) {
 	QPixmap imageCadre(":/images/Case_Rose.png");
-	QPixmap imagePowerup = powerup.pixmap().scaled(imageCadre.width() - 160, imageCadre.height() - 160, Qt::KeepAspectRatio);
+	QPixmap imagePowerup = powerup->pixmap().scaled(imageCadre.width() - 160, imageCadre.height() - 160, Qt::KeepAspectRatio);
 	QPainter painter(&imageCadre);
 	painter.drawPixmap(imageCadre.width() / 2 - imagePowerup.width() / 2, imageCadre.height() / 2 - imagePowerup.height() / 2, imagePowerup);
 	labelImagePowerup->setPixmap(imageCadre.scaledToWidth(150));
 }
+
+void PanneauDroite::viderCase() {
+	QPixmap imageCadre(":/images/Case_Rose.png");
+	labelImagePowerup->setPixmap(imageCadre.scaledToWidth(150));
+}
+

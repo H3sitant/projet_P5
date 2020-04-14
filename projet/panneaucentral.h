@@ -21,6 +21,7 @@ public:
     PanneauCentral(Burger *commande, QWidget*parent = nullptr);
     const int LARGEUR = 500;
     const int HAUTEUR = 500;
+	void finPowerups();
 	void verifierPowerups();
 	void activerRainbow();
 	void activerPower(Condiment *powerup);
@@ -37,6 +38,7 @@ public slots:
 signals:
 	void pauseSignal();
 	void finPartie(bool victoire);
+	void powerupActive( Condiment *powerup);
 
 private:
 	QWidget *parent;
@@ -45,13 +47,11 @@ private:
     //void resizeEvent(QResizeEvent *event);
     Personnage *player;
     void keyPressEvent(QKeyEvent *event);
-	Condiment recette[Grosseur_liste];
 	list<Condiment*> FallingCondiments;
 	int delayFalling;
 	bool finduJeux;
 	QTimer * timer;
 	char powerUpActif = NULL;
-	int tempsRestantPowerup = 0;
 	static const int TEMPS_MAX_POWERUP = 10;
 	static const int PROBPOWERUP = 2;
 	static const int PROB_CORONA = 5;

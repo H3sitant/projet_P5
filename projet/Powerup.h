@@ -6,7 +6,7 @@ public:
 	Powerup(SortePowerup sorte, Point position);
 	Powerup(SortePowerup sorte);
 	Powerup();
-	char toString();
+	string toString() const;
 	SortePowerup getSortePow();
 	void setSortePow(SortePowerup sorte);
 

@@ -36,23 +36,23 @@ void Powerup::setSortePow(SortePowerup sorte) {
 	setPixmap(QPixmap(imagePath.c_str()));
 }
 
-char Powerup::toString()
+string Powerup::toString() const
 {
 	switch (sortePow) {
 	case STAR:
-		return 'S';
+		return "STAR";
 		break;
 	case RAINBOW:
-		return 'R';
+		return "RAINBOW";
 		break;
 	case POTION:
-		return 'M'; //Comme dans magique
+		return "POTION"; //Comme dans magique
 		break;
 	case CORONA:
-		return 'C';
+		return "COVID-19";
 		break;
 	default:
-		return 'e';
+		return "erreur";
 		break;
 	}
 }

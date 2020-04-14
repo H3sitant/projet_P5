@@ -39,8 +39,11 @@ FenetreJeu::FenetreJeu(QWidget * parent) : QWidget(parent)
 
 
     this->setLayout(mainLayout);
+	connect(panneauDroite, &PanneauDroite::finPowerupSignal, this, &FenetreJeu::finPowerup);
+	connect(panneauDroite, &PanneauDroite::boutonMenuClicked, this, &FenetreJeu::pause);
 	connect(panneauCentral, &PanneauCentral::pauseSignal, this, &FenetreJeu::pause);
 	connect(panneauCentral, &PanneauCentral::finPartie, this, &FenetreJeu::finPartie);
+	connect(panneauCentral, &PanneauCentral::powerupActive, this, &FenetreJeu::activationPowerup);
 	timer = new QTimer;
 	connect(timer, &QTimer::timeout, this, &FenetreJeu::slotTimer);
 	
@@ -66,7 +69,13 @@ void FenetreJeu::resume() {
 	panneauCentral->resume();
 }
 
+void FenetreJeu::finPowerup()
+{
+	panneauCentral->finPowerups();
+}
+
 void FenetreJeu::finPartie(bool victoire) {
+	timer->stop();
 	emit finPartieSignal(victoire);
 }
 
@@ -77,6 +86,12 @@ void FenetreJeu::slotTimer()
 		panneauCentral->pause();
 		finPartie(false);
 	}
+	panneauDroite->diminuerTempsPowerup();
+}
+
+void FenetreJeu::activationPowerup( Condiment * powerup)
+{
+	panneauDroite->setPowerupActif(powerup);
 }
 
 void FenetreJeu::demarrerNouvellePartie()
@@ -85,6 +100,7 @@ void FenetreJeu::demarrerNouvellePartie()
 	panneauGauche->setTemps(180);
 	panneauGauche->dessinerCommande();
 	panneauCentral->demarrerNouvellePartie();
+	panneauDroite->reset();
 	timer->start(1000); //timer a la seconde
 }
 
@@ -100,16 +116,5 @@ void FenetreJeu::genererCommande(int nbrItem) {
 			commande->ajouterCondiment(nextCondiment);
 		}
 		commande->ajouterCondiment(new Condiment(Condiment::PAIN_H, { 0,0 }));
-	}
-}
-
-void FenetreJeu::keyPressEvent(QKeyEvent *event) {
-	if (event->key() == Qt::Key_P) {
-		if (isPaused) {
-			resume();
-		}
-		else {
-			pause();
-		}
 	}
 }

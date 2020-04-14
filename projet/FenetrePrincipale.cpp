@@ -78,6 +78,7 @@ void FenetrePrincipale::slotRejouer()
 
 void FenetrePrincipale::slotFinPartie(bool victoire)
 {
+
 	afficherFinPartie(victoire);
 }
 

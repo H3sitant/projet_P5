@@ -26,6 +26,8 @@ Condiment::Condiment(SorteCondiment sorte, Point position) {
 }
 
 
+
+
 enum Condiment::SorteCondiment Condiment::getSorte()
 {
     return sorte;
@@ -113,6 +115,52 @@ double Condiment::getPositionX()
 double Condiment::getPositionY()
 {
 	return y();	
+}
+
+string Condiment::toString() const
+{
+	switch (sorte) {
+	case Condiment::PAIN_H:
+		return "Pain_Haut";
+		break;
+	case Condiment::PAIN_B:
+		return "Pain_Bas";
+		break;
+	case Condiment::LAITUE:
+		return "Laitue";
+		break;
+	case Condiment::TOMATE:
+		return "Tomate";
+		break;
+	case Condiment::OIGNON:
+		return "Oignon";
+		break;
+	case Condiment::BOULETTE:
+		return "Viande";
+		break;
+	case Condiment::FROMAGE:
+		return "Fromage";
+		break;
+	case Condiment::POWERUP:
+	
+		switch (sortePow) {
+		case STAR:
+			return "STAR";
+			break;
+		case RAINBOW:
+			return "RAINBOW";
+			break;
+		case POTION:
+			return "POTION"; 
+			break;
+		case CORONA:
+			return "COVID-19";
+			break;
+		default:
+			return "erreur";
+			break;
+	}
+	}
 }
 
 

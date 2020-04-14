@@ -24,6 +24,8 @@ public:
 	Condiment(Point p = { 0,0 });
 	Condiment(SorteCondiment sorte, Point position);
 
+	Condiment(const Condiment  &obj);
+
 	void setSorte(SorteCondiment sorte);
 	SorteCondiment getSorte();
 
@@ -33,6 +35,8 @@ public:
 	
 	double getPositionX();
 	double getPositionY();
+
+	string toString() const;
 
 	void setPositionX(double x);
 	void setPositionY(double y);

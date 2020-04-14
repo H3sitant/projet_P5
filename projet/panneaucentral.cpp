@@ -39,6 +39,7 @@ void PanneauCentral::demarrerNouvellePartie() {
 	finduJeux = false;
 	tailleRecette = commande->getCondiments().size();
 	delayFalling = 0;
+	powerUpActif = NULL;
 
 	player = new Personnage();
 	//Chargement de l'image
@@ -172,27 +173,24 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
 
 }*/
 
+void PanneauCentral::finPowerups() {
 
+		player->setmovementSpeed(10);
+		largeurCapter = 10;
+		powerUpActif = NULL;
+	
+}
 
 //================================================
 //PowerUp
 //================================================
 void PanneauCentral::verifierPowerups() {
-	tempsRestantPowerup--;
 
 	if (powerUpActif == 'R') {
 		activerRainbow();
 	}
 
-	if (tempsRestantPowerup <= 0)
-	{
-		if (powerUpActif == 'S')
-		{
-			player->setmovementSpeed(10);
-			largeurCapter = 10;
-		}
-		powerUpActif = NULL;
-	}
+	
 }
 
 void PanneauCentral::activerRainbow() {
@@ -230,7 +228,7 @@ void PanneauCentral::activerRainbow() {
 
 void PanneauCentral::activerPower(Condiment *powerup)
 {
-	cout << "Powerup activ�!";
+	
 	//TODO Coder les diff�rentes effets des powerups
 	switch (powerup->getSortePow()) {
 	case Powerup::STAR:
@@ -240,7 +238,8 @@ void PanneauCentral::activerPower(Condiment *powerup)
 		player->setmovementSpeed(20);
 		largeurCapter = 15;
 		powerUpActif = 'S';
-		tempsRestantPowerup = 200;// 1=50 milliseconde
+		emit powerupActive(powerup);
+		//tempsRestantPowerup = 200;// 1=50 milliseconde
 		break;
 	case Powerup::RAINBOW:
 		//powerUpActif = Toujours le bon item
@@ -252,7 +251,8 @@ void PanneauCentral::activerPower(Condiment *powerup)
 			largeurCapter = 10;
 		}
 		powerUpActif = 'R';
-		tempsRestantPowerup = 200;
+		emit powerupActive(powerup);
+		//tempsRestantPowerup = 200;
 		activerRainbow();
 		break;
 	case Powerup::POTION:
