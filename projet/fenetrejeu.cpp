@@ -6,9 +6,9 @@
 
 #include <iostream>
 
-FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
+FenetreJeu::FenetreJeu(QWidget * parent) : QWidget(parent)
 {
-	this->parent = parent;
+
 	commande = new Burger();
 	genererCommande();
     mainLayout = new QHBoxLayout(this);
@@ -40,7 +40,7 @@ FenetreJeu::FenetreJeu(FenetrePrincipale * parent) : QWidget(parent)
 
     this->setLayout(mainLayout);
 
-
+	connect(panneauCentral, &PanneauCentral::finPartie, this, &FenetreJeu::finPartie);
     
 }
 
@@ -52,11 +52,16 @@ FenetreJeu::~FenetreJeu()
 
 void FenetreJeu::pause(){
 	printf("FenetreJeu::pause");
-	parent->afficherMenuPause();
+	emit  pauseSignal();
 }
 
 void FenetreJeu::finPartie(bool victoire) {
-	parent->afficherFinPartie(victoire);
+	emit finPartieSignal(victoire);
+}
+
+void FenetreJeu::demarrerNouvellePartie()
+{
+	panneauCentral->demarrerNouvellePartie();
 }
 
 void FenetreJeu::genererCommande(int nbrItem) {

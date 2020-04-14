@@ -4,6 +4,7 @@
 
 #include <QStackedWidget>
 #include "MenuFinPartie.h"
+#include "fenetrejeu.h"
 
 
 class FenetrePrincipale : public QStackedWidget
@@ -17,16 +18,19 @@ public:
 	void retour();
 	void afficherMenuPause();
 	void afficherInstructions();
+
 	void demarrerNouvellePartie();
+	
 	void afficherFinPartie(bool victoire);
 
 public slots:
 	void slotAfficherMenuPrincipal();
 	void slotProchainNiveau();
 	void slotRejouer();
+	void slotFinPartie(bool victoire);
 
 private:
-	QWidget *jeu;
+	FenetreJeu *jeu;
 	QWidget* menuPrincipal;
 	QWidget* menuPause;
 	QWidget* instructions;

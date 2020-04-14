@@ -7,14 +7,11 @@
 using namespace std;
 
 
-PanneauCentral::PanneauCentral(Burger *commande, FenetreJeu *parent): QGraphicsView(parent)
+PanneauCentral::PanneauCentral(Burger *commande, QWidget *parent): QGraphicsView(parent)
 {
 	this->parent = parent;
 	this->commande = commande;
-	victoire = false;
-	finduJeux = false;
-	tailleRecette = commande->getCondiments().size();
-	delayFalling = 0;
+	
 	//FallingCondiments = new list<Condiment*>;
     scene = new QGraphicsScene(this);
     scene->setSceneRect(0,0,LARGEUR,HAUTEUR);
@@ -23,29 +20,50 @@ PanneauCentral::PanneauCentral(Burger *commande, FenetreJeu *parent): QGraphicsV
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     //fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
-    player = new Personnage();
-    //Chargement de l'image
-    QPixmap pix(":/images/Licorne.png");
-    //Redimension
-    pix = pix.scaledToWidth(LARGEUR/5,Qt::SmoothTransformation);
-    player->setPixmap(pix);
-    //Positionnement
-    player->setPos(LARGEUR/2, HAUTEUR-pix.height()); 
+    
+    
 
-
-    // focusable = recoit les events
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
-    player->setFocus();
-    scene->addItem(player);
-	Condiment *base = new Condiment(Condiment::PAIN_B, {player->x(),500-player->getHight()});
-	scene->addItem(base);
-	player->ajouterCondiment(base);
+	
     /*QPalette pal = QPalette();
     pal.setColor(QPalette::Background, QColor(0,0,0,0));
     scene->setPalette(pal);*/
 	
 	timer = new QTimer();
 	QObject::connect(timer, SIGNAL(timeout()), this, SLOT(CheckPosition()));
+	
+}
+
+void PanneauCentral::demarrerNouvellePartie() {
+	scene->clear();
+	victoire = false;
+	finduJeux = false;
+	tailleRecette = commande->getCondiments().size();
+	delayFalling = 0;
+
+	player = new Personnage();
+	//Chargement de l'image
+	QPixmap pix(":/images/Licorne.png");
+	//Redimension
+	pix = pix.scaledToWidth(LARGEUR / 5, Qt::SmoothTransformation);
+	player->setPixmap(pix);
+	// focusable = recoit les events
+	player->setFlag(QGraphicsItem::ItemIsFocusable);
+	player->setFocus();
+	player->setPos(LARGEUR / 2, HAUTEUR - player->pixmap().height());
+
+	FallingCondiments.clear();
+	Condiment *base = new Condiment(Condiment::PAIN_B, { player->x(),500 - player->getHight() });
+	scene->addItem(base);
+	player->ajouterCondiment(base);
+	scene->addItem(player);
+	timer->start(50);
+}
+
+void PanneauCentral::pause() {
+	timer->stop();
+}
+
+void PanneauCentral::resume() {
 	timer->start(50);
 }
 
@@ -112,7 +130,7 @@ void PanneauCentral::CheckPosition()
 						if (*player->getBurger() == *commande) {
 							victoire = true;
 						}
-						parent->finPartie(victoire);
+						emit finPartie(victoire);
 					}
 					else
 					{
@@ -148,7 +166,10 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
         player->deplacer(GAUCHE,LARGEUR);
     } else if (event->key() == Qt::Key_Right){
         player->deplacer(DROITE,LARGEUR);
-    }
+	}
+	else if (event->key() == Qt::Key_P) {
+		pause();
+	}
 }
 
 /*void PanneauCentral::resizeEvent(QResizeEvent *event){

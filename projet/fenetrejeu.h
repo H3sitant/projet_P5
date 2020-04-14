@@ -3,32 +3,38 @@
 
 #include <QMainWindow>
 #include <QtWidgets>
-#include "FenetrePrincipale.h"
 #include "burger.h"
+#include "panneaucentral.h"
 
 class FenetreJeu : public QWidget
 {
     Q_OBJECT
 
 public:
-	FenetreJeu(FenetrePrincipale * parent=nullptr);
+	FenetreJeu(QWidget * parent=nullptr);
 	~FenetreJeu();
 
-	void finPartie(bool victoire);
-
+	
+	void demarrerNouvellePartie();
+	
 	void genererCommande(int nbrItem=5);
 
 public slots:
      void pause();
+	 void finPartie(bool victoire);
 
+signals:
+	void pauseSignal();
+	void finPartieSignal(bool victoire);
 
 private:
     QHBoxLayout *mainLayout;
     QWidget *panneauGauche;
     QWidget *panneauDroite;
-    QWidget *panneauCentral;
+    PanneauCentral *panneauCentral;
     QBasicTimer *timer;
-	FenetrePrincipale * parent;
 	Burger *commande;
+
+	
 };
 #endif // FENETREJEU_H

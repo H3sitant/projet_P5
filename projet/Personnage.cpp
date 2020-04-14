@@ -28,9 +28,19 @@ Burger* Personnage::getBurger()
 	return burger;
 }
 
+void Personnage::viderBurger()
+{
+	burger->viderBurger();
+}
+
 void Personnage::retirerTop() {
 	burger->retirerTop();
 	Hight -= 20;
+}
+
+void Personnage::setBurger(Burger * burger)
+{
+	this->burger = burger;
 }
 
 

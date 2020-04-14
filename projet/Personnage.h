@@ -19,8 +19,9 @@ public:
 	int getPosition();
 	void setPosition(int newPosition);
 	Burger* getBurger();
+	void viderBurger();
 	void retirerTop();
-	void setBurger(Burger burger);
+	void setBurger(Burger *burger);
 	void deplacer(int direction, int largeur);
     size_t getHauteurBurger();
 	char toString();

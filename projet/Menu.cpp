@@ -28,7 +28,7 @@ Menu::Menu(FenetrePrincipale * parent)
 
 void Menu::actionJouer() {
 	printf("jouer");
-	parent->afficherJeu();
+	parent->demarrerNouvellePartie();
 }
 void Menu::actionInstruction() {
 	printf("instrcutions");

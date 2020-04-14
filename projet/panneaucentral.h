@@ -6,7 +6,6 @@
 #include "Condiment.h"
 #include <QTimer>
 #include "burger.h"
-#include "fenetrejeu.h"
 
 
 #define Grosseur_liste 20
@@ -19,12 +18,16 @@ class PanneauCentral : public QGraphicsView
 {
 	Q_OBJECT
 public:
-    PanneauCentral(Burger *commande, FenetreJeu*parent = nullptr);
+    PanneauCentral(Burger *commande, QWidget*parent = nullptr);
     const int LARGEUR = 500;
     const int HAUTEUR = 500;
 	void verifierPowerups();
 	void activerRainbow();
 	void activerPower(Condiment *powerup);
+	void demarrerNouvellePartie();
+	void pause();
+
+	void resume();
 
 public slots:
      void droite();
@@ -33,8 +36,11 @@ public slots:
 	 void CheckPosition();
 	 void FC();
 
+signals:
+	void finPartie(bool victoire);
+
 private:
-	FenetreJeu *parent;
+	QWidget *parent;
 	Burger* commande;
     QGraphicsScene* scene;
     //void resizeEvent(QResizeEvent *event);
