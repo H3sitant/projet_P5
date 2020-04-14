@@ -32,6 +32,7 @@ private:
     QLabel *labelPowerup;
     QLabel *labelImagePowerup;
     QLabel *labelTempsPowerup;
+	QProgressBar* progressBar;
 
 	void setTempsPowerup(int temps);
 	void dessinerPowerup(Condiment * powerup);

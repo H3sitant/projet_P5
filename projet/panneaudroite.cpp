@@ -27,9 +27,12 @@ PanneauDroite::PanneauDroite(QWidget*parent): QWidget(parent)
     labelPowerup = new QLabel(tr("POWERUP ACTIF: \n AUCUN"),this);
 	labelImagePowerup = new QLabel();
 
+	progressBar = new QProgressBar(this);
+	progressBar->setMaximum(10);
+	progressBar->setFormat("%v secondes");
 	
 	viderCase();
-    labelTempsPowerup = new QLabel(tr("TEMPS POWERUP: \n 0"),this);
+    labelTempsPowerup = new QLabel(tr("TEMPS POWERUP:"),this);
 
 
     layoutPanneauDroite->addWidget(boutonMenu);
@@ -37,6 +40,7 @@ PanneauDroite::PanneauDroite(QWidget*parent): QWidget(parent)
     layoutPanneauDroite->addWidget(labelPowerup);
 	layoutPanneauDroite->addWidget(labelImagePowerup);
     layoutPanneauDroite->addWidget(labelTempsPowerup);
+	layoutPanneauDroite->addWidget(progressBar);
     layoutPanneauDroite->addStretch();
 	labelImagePowerup->setAlignment(Qt::AlignCenter);
 	labelImagePowerup->setStyleSheet("center");
@@ -81,7 +85,8 @@ void PanneauDroite::finPowerup() {
 
 void PanneauDroite::setTempsPowerup(int temps){
 	this->temps = temps;
-	labelTempsPowerup->setText(tr("TEMPS POWERUP: \n ") + QString::number(temps));
+	progressBar->setValue(temps);
+	
 	
 }
 
