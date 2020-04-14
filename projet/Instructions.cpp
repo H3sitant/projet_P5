@@ -29,10 +29,11 @@ Instructions::Instructions(FenetrePrincipale *parent)
 	powerups = new QLabel("Objets speciaux");
 	powerups->setAlignment(Qt::AlignCenter);
 	arc = new QLabel("Tous les ingredients deviennent ceux dont vous avez\nbesoin pendant un certain temps");
-	potion = new QLabel("Permet de retirer le dernier element du burger");
-	etoile = new QLabel("Deplacement plus rapide");
-	corona = new QLabel("Deplacement plus lent");
+	potion = new QLabel("Retire le dernier element du burger");
+	etoile = new QLabel("Deplacement plus rapide pour un temps limite");
+	corona = new QLabel("Fait le bordel et melange le burger!");
 	quitterI = new QPushButton("Retour");
+	quitterI->setStyleSheet("QPushButton{background-color: rgba(0,0,0,80)} QPushButton:hover{background-color: rgba(0,0,0,100)}");
 	
 	QLabel *imageBurger = new QLabel();
 	imageBurger->setAlignment(Qt::AlignCenter);
@@ -93,8 +94,9 @@ Instructions::Instructions(FenetrePrincipale *parent)
 	grid->addWidget(imageCorona, 3, 0, Qt::AlignCenter);
 	grid->addWidget(corona, 3, 1);
 	mainLayout->addStretch();
-	mainLayout->addSpacing(20);
+	
 	mainLayout->addWidget(quitterI);
+	mainLayout->addSpacing(20);
 	createMenu();
 }
 
