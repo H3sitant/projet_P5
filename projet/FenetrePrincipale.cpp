@@ -16,7 +16,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 	finPartie = new  MenuFinPartie(this);
 	connect(finPartie, &MenuFinPartie::boutonMenuClicked, this, &FenetrePrincipale::slotAfficherMenuPrincipal);
 	connect(finPartie, &MenuFinPartie::boutonRejouerClicked, this, &FenetrePrincipale::slotRejouer);
-	setFixedSize(1600, 900);
+	setFixedSize(1200, 600);
 	addWidget(jeu);
 	addWidget(menuPrincipal);
 	addWidget(menuPause);
