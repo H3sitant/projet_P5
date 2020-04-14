@@ -5,9 +5,13 @@
 #include <qpushbutton.h>
 
 
+
 class MenuFinPartie :
 	public QGraphicsView
+
 {
+	Q_OBJECT
+
 public:
 	MenuFinPartie(QWidget * parent, bool victoire=true);
 
@@ -16,6 +20,15 @@ public:
 	void setPoint(int point);
 
 	void setVictoire(bool victoire);
+
+ signals:
+	void boutonMenuClicked();
+	void boutonRejouerClicked();
+
+private slots:
+	void slotBoutonMenu();
+	void slotBoutonRejouer();
+
 
 
 private:

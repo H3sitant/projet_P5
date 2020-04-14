@@ -24,12 +24,12 @@ MenuFinPartie::MenuFinPartie(QWidget * parent, bool victoire):QGraphicsView(pare
 
 	QPushButton * boutonRejouer = new QPushButton("REJOUER");
 	boutonRejouer->setGeometry((xPos / 2 + 30) - 130, yPos, 260, 50);
-	connect(boutonRejouer, SIGNAL(clicked()), parent, SLOT(FenetrePrincipale::demarrerNouvellePartie()), Qt::QueuedConnection);
+	connect(boutonRejouer, &QPushButton::clicked, this, &MenuFinPartie::slotBoutonRejouer);
 	scene->addWidget(boutonRejouer);
 
 	QPushButton * boutonRetour = new QPushButton("MENU PRINCIPAL");
 	boutonRetour->setGeometry((xPos / 2 + 30) - 250, yPos + 75, 500, 50);
-	connect(boutonRetour, SIGNAL(clicked()), parent, SLOT(FenetrePrincipale::retour()), Qt::QueuedConnection);
+	connect(boutonRetour, &QPushButton::clicked, this, &MenuFinPartie::slotBoutonMenu);
 	scene->addWidget(boutonRetour);
 
 	imageFin = new QGraphicsPixmapItem;
@@ -59,4 +59,14 @@ void MenuFinPartie::setVictoire(bool victoire) {
 		imageFin->setPixmap(imageDefaite);
 		imageFin->setPos(xPos - 50, imageFin->boundingRect().height() / 2 - 60);
 	}
+}
+
+void MenuFinPartie::slotBoutonRejouer()
+{
+	emit boutonRejouerClicked();
+}
+
+void MenuFinPartie::slotBoutonMenu()
+{
+	emit boutonMenuClicked();
 }

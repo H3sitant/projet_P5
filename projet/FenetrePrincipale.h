@@ -20,6 +20,11 @@ public:
 	void demarrerNouvellePartie();
 	void afficherFinPartie(bool victoire);
 
+public slots:
+	void slotAfficherMenuPrincipal();
+	void slotProchainNiveau();
+	void slotRejouer();
+
 private:
 	QWidget *jeu;
 	QWidget* menuPrincipal;

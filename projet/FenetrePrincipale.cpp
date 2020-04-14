@@ -12,6 +12,8 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 	menuPause = new Pause(this);
 	instructions = new Instructions(this);
 	finPartie = new  MenuFinPartie(this);
+	connect(finPartie, &MenuFinPartie::boutonMenuClicked, this, &FenetrePrincipale::slotAfficherMenuPrincipal);
+	connect(finPartie, &MenuFinPartie::boutonRejouerClicked, this, &FenetrePrincipale::slotRejouer);
 	setFixedSize(1600, 900);
 	addWidget(jeu);
 	addWidget(menuPrincipal);
@@ -57,6 +59,20 @@ void FenetrePrincipale::afficherFinPartie(bool victoire)
 	int memCurrentIndex = currentIndex();
 	finPartie->setVictoire(victoire);
 	setCurrentWidget(finPartie);
+}
+
+void FenetrePrincipale::slotProchainNiveau()
+{
+
+}
+
+void FenetrePrincipale::slotRejouer()
+{
+	demarrerNouvellePartie();
+}
+
+void FenetrePrincipale::slotAfficherMenuPrincipal() {
+	afficherMenuPrincipal();
 }
 
 void FenetrePrincipale::afficherMenuPrincipal()
