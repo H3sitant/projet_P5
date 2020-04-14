@@ -118,3 +118,9 @@ void FenetreJeu::genererCommande(int nbrItem) {
 		commande->ajouterCondiment(new Condiment(Condiment::PAIN_H, { 0,0 }));
 	}
 }
+
+void FenetreJeu::keyPressEvent(QKeyEvent* event) {
+		if (event->key() == Qt::Key_P) {
+			pause();
+	}
+}

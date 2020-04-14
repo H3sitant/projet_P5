@@ -21,6 +21,7 @@ public:
 	void demarrerNouvellePartie();
 	
 	void genererCommande(int nbrItem=5);
+	void keyPressEvent(QKeyEvent * event);
 	void resume();
 
 public slots:
