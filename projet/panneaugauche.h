@@ -11,9 +11,10 @@ public:
     void setPointage(int pointage);
     void setNbrVies(int nbr);
 	void dessinerCommande();
+	void diminuerTemps();
+	void setTemps(int temps);
+	int getTemps();
 
-public slots:
-    void updateTemps(int temps);
 
 
 
@@ -22,7 +23,8 @@ private:
     QVBoxLayout *layoutPanneauGauche;
 	QLabel* labelImageBurger;
 	Burger*commande;
-	
+	int temps=180;
+	QLabel *labelTemps;
 
 	
 

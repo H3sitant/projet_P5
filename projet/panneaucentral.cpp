@@ -167,9 +167,6 @@ void PanneauCentral::keyPressEvent(QKeyEvent *event){
     } else if (event->key() == Qt::Key_Right){
         player->deplacer(DROITE,LARGEUR);
 	}
-	else if (event->key() == Qt::Key_P) {
-		pause();
-	}
 }
 
 /*void PanneauCentral::resizeEvent(QResizeEvent *event){

@@ -32,22 +32,20 @@ vies->setLayout(layoutVies);
 labelImageBurger = new QLabel();
 dessinerCommande();
 
-QLabel *temps = new QLabel();
-temps->setText(tr("TEMPS: 180"));
+labelTemps = new QLabel();
+labelTemps->setText(tr("TEMPS RESTANT: 180"));
 
 
 layoutPanneauGauche->addWidget(pointage);
 layoutPanneauGauche->addWidget(vies);
 layoutPanneauGauche->addSpacing(75-taille);
-layoutPanneauGauche->addWidget(temps);
+layoutPanneauGauche->addWidget(labelTemps);
 layoutPanneauGauche->addWidget(labelImageBurger);
 layoutPanneauGauche->addStretch();
 
 }
 
-void PanneauGauche::updateTemps(int temps){
 
-}
 
 void PanneauGauche::dessinerCommande() {
 	QPixmap imageCadre(":/images/Case_Bleue.png");
@@ -55,5 +53,22 @@ void PanneauGauche::dessinerCommande() {
 	QPainter painter(&imageCadre);
 	painter.drawPixmap(imageCadre.width() / 2 - imageBurger.width() / 2, imageCadre.height() / 2 - imageBurger.height() / 2, imageBurger);
 	labelImageBurger->setPixmap(imageCadre.scaledToWidth(150));
+}
+
+void PanneauGauche::diminuerTemps()
+{
+	labelTemps->setText(QString("TEMPS RESTANT: ")+QString::number(--temps));
+	
+}
+
+void PanneauGauche::setTemps(int temps)
+{
+	this->temps = temps;
+	labelTemps->setText(QString("TEMPS RESTANT: ") + QString(--temps));
+}
+
+int PanneauGauche::getTemps()
+{
+	return temps;
 }
 

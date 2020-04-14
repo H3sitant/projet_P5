@@ -6,6 +6,7 @@
 #include "burger.h"
 #include "panneaucentral.h"
 #include "panneaugauche.h"
+#include <QKeyEvent>
 
 class FenetreJeu : public QWidget
 {
@@ -19,10 +20,13 @@ public:
 	void demarrerNouvellePartie();
 	
 	void genererCommande(int nbrItem=5);
+	void resume();
 
 public slots:
      void pause();
+	 
 	 void finPartie(bool victoire);
+	 void slotTimer();
 
 signals:
 	void pauseSignal();
@@ -33,9 +37,11 @@ private:
     PanneauGauche *panneauGauche;
     QWidget *panneauDroite;
     PanneauCentral *panneauCentral;
-    QBasicTimer *timer;
+    QTimer *timer;
 	Burger *commande;
 
+	bool isPaused;
+	void keyPressEvent(QKeyEvent *event);
 	
 };
 #endif // FENETREJEU_H

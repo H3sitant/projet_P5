@@ -16,7 +16,7 @@ public:
 	void afficherJeu();
 	void afficherMenuPrincipal();
 	void retour();
-	void afficherMenuPause();
+	
 	void afficherInstructions();
 
 	void demarrerNouvellePartie();
@@ -25,6 +25,7 @@ public:
 
 public slots:
 	void slotAfficherMenuPrincipal();
+	void slotAfficherMenuPause();
 	void slotProchainNiveau();
 	void slotRejouer();
 	void slotFinPartie(bool victoire);

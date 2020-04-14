@@ -9,6 +9,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 {
 	jeu = new FenetreJeu(this);
 	connect(jeu, &FenetreJeu::finPartieSignal, this, &FenetrePrincipale::slotFinPartie);
+	connect(jeu, &FenetreJeu::pauseSignal, this, &FenetrePrincipale::slotAfficherMenuPause);
 	menuPrincipal = new Menu(this);
 	menuPause = new Pause(this);
 	instructions = new Instructions(this);
@@ -30,10 +31,11 @@ void FenetrePrincipale::afficherJeu()
 {
 	int memCurrentIndex = currentIndex();
 	setCurrentWidget(jeu);
+	jeu->resume();
 	lastWidgetId = memCurrentIndex;
 }
 
-void FenetrePrincipale::afficherMenuPause()
+void FenetrePrincipale::slotAfficherMenuPause()
 {
 	int memCurrentIndex = currentIndex();
 	printf("FenetrePrincipale");
