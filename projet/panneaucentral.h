@@ -30,13 +30,12 @@ public:
 	void resume();
 
 public slots:
-     void droite();
-     void gauche();
-     void timeTick();
 	 void CheckPosition();
+	 
 	 void FC();
 
 signals:
+	void pauseSignal();
 	void finPartie(bool victoire);
 
 private:

@@ -39,10 +39,11 @@ FenetreJeu::FenetreJeu(QWidget * parent) : QWidget(parent)
 
 
     this->setLayout(mainLayout);
-
+	connect(panneauCentral, &PanneauCentral::pauseSignal, this, &FenetreJeu::pause);
 	connect(panneauCentral, &PanneauCentral::finPartie, this, &FenetreJeu::finPartie);
 	timer = new QTimer;
 	connect(timer, &QTimer::timeout, this, &FenetreJeu::slotTimer);
+	
 }
 
 FenetreJeu::~FenetreJeu()

@@ -150,22 +150,15 @@ void PanneauCentral::CheckPosition()
 		}
 	}
 }
-void PanneauCentral::timeTick(){
-
-}
-
-void PanneauCentral::droite(){
-
-}
-void PanneauCentral::gauche(){
-
-}
 
 void PanneauCentral::keyPressEvent(QKeyEvent *event){
     if (event->key() == Qt::Key_Left){
         player->deplacer(GAUCHE,LARGEUR);
     } else if (event->key() == Qt::Key_Right){
         player->deplacer(DROITE,LARGEUR);
+	}
+	else if (event->key() == Qt::Key_P) {
+		emit pauseSignal();
 	}
 }
 
