@@ -61,6 +61,7 @@ void FenetrePrincipale::afficherFinPartie(bool victoire)
 	int memCurrentIndex = currentIndex();
 	finPartie->setVictoire(victoire);
 	setCurrentWidget(finPartie);
+	lastWidgetId = memCurrentIndex;
 }
 
 void FenetrePrincipale::slotProchainNiveau()

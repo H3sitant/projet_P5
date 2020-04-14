@@ -10,6 +10,7 @@ public:
 	PanneauGauche(Burger *commande, QWidget * parent=nullptr);
     void setPointage(int pointage);
     void setNbrVies(int nbr);
+	void dessinerCommande();
 
 public slots:
     void updateTemps(int temps);
@@ -23,7 +24,7 @@ private:
 	Burger*commande;
 	
 
-	void dessinerCommande();
+	
 
 };
 

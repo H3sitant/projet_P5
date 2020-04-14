@@ -5,6 +5,7 @@
 #include <QtWidgets>
 #include "burger.h"
 #include "panneaucentral.h"
+#include "panneaugauche.h"
 
 class FenetreJeu : public QWidget
 {
@@ -29,7 +30,7 @@ signals:
 
 private:
     QHBoxLayout *mainLayout;
-    QWidget *panneauGauche;
+    PanneauGauche *panneauGauche;
     QWidget *panneauDroite;
     PanneauCentral *panneauCentral;
     QBasicTimer *timer;

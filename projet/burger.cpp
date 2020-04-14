@@ -19,7 +19,7 @@ QPixmap Burger::getBurgerPixmap()
 	int nextHeight = finalHeight-24;
 	for (Condiment* c : condiments) {
 		if (c->getSorte() == Condiment::PAIN_H)  nextHeight -= 40 - 16;
-		else if (c->getSorte() == Condiment::LAITUE) nextHeight += 8; //la laitue dois être placé plus bas
+		//else if (c->getSorte() == Condiment::LAITUE) nextHeight += 8; //la laitue dois être placé plus bas
 		painter.drawPixmap(0, nextHeight, c->pixmap());
 		nextHeight -= 16;
 	}

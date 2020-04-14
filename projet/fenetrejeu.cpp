@@ -61,6 +61,8 @@ void FenetreJeu::finPartie(bool victoire) {
 
 void FenetreJeu::demarrerNouvellePartie()
 {
+	genererCommande();
+	panneauGauche->dessinerCommande();
 	panneauCentral->demarrerNouvellePartie();
 }
 
