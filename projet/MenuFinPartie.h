@@ -5,7 +5,8 @@
 #include <qpushbutton.h>
 
 
-
+//Fenetre de fin de partie
+//Modulable selon la victoir/défaite du joueur
 class MenuFinPartie :
 	public QGraphicsView
 

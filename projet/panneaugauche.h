@@ -3,6 +3,12 @@
 #include <QtWidgets>
 #include "burger.h"
 
+/*
+Panneau gauche de la fenêtre de jeu
+Afficher les informations quant à l'évolution de la partie
+(Points, vie, commande et temps restant)
+*/
+
 class PanneauGauche : public QWidget
 {
     Q_OBJECT

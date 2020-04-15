@@ -1,7 +1,7 @@
 #include <QtWidgets>
 #include "FenetrePrincipale.h"
 
-
+//Fenêtre du menu instructions
 class Instructions : public QWidget {
 	Q_OBJECT
 

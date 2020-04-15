@@ -8,7 +8,10 @@
 #include "panneaugauche.h"
 #include "PanneauDroite.h"
 #include <QKeyEvent>
-
+/*
+Fenêtre du jeu, divisé en 3 panneaux.
+Ce widget s'occupe de la communication entre les informations des différents panneaux
+*/
 class FenetreJeu : public QWidget
 {
     Q_OBJECT

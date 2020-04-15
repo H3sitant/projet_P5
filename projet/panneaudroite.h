@@ -3,6 +3,9 @@
 #include <QtWidgets>
 #include "Powerup.h"
 
+//Panneau droite de la fenêtre de jeu
+//Contient les informations quant au powerup actif
+//Ainsi qu'un bouton pause
 class PanneauDroite : public QWidget
 
 {

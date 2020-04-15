@@ -8,11 +8,12 @@
 #include "burger.h"
 
 
-#define Grosseur_liste 20
 #define Speed 10
 #define DelayFall 20 // 1=50 milliseconde
 
-//modifier la taille de la liste avec le score ->  score + 2 < 10 ? liste_longeur = (score + 2):liste_longeur=(9);
+//Panneau central de la fenêtre de jeu
+//C'est lui qui s'occupe de la zone ou les condiments tombe
+//Et gère les action du joueur
 
 class PanneauCentral : public QGraphicsView
 {

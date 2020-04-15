@@ -4,7 +4,9 @@
 
 #include <QtWidgets>
 #include "FenetrePrincipale.h"
-
+/*
+Menu principal de l'application
+*/
 class Menu : public QWidget {
 	Q_OBJECT
 

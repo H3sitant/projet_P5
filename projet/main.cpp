@@ -4,6 +4,8 @@
 #include <QApplication>
 #include <QMainWindow>
 
+//Démarrage de l'application
+
 int main(int argc, char *argv[])
 {
 	srand(time(NULL)); //initialise le random
@@ -12,23 +14,17 @@ int main(int argc, char *argv[])
 	QFontDatabase::addApplicationFont(":police/Teletactile.ttf");
 
 	FenetrePrincipale fenetre;
+	fenetre.setWindowTitle("Fat UNICORN");
+	fenetre.setWindowIcon(QIcon(":images/Modele_Burger.png"));
+	fenetre.show();
 
 	QPixmap bkgnd(":/images/Fond_Menu.png");
 	bkgnd = bkgnd.scaled(fenetre.size(), Qt::IgnoreAspectRatio);
 	QPalette palette;
 	palette.setBrush(QPalette::Background, bkgnd);
 	a.setPalette(palette);
-
 	
 
-	fenetre.show();
-	//QMainWindow window;
-	//window.setCentralWidget(fenetre);
-    //w.show();
-//	Menu *menu = new Menu();;
-	//menu->setMinimumSize(500, 500);
-	//window.setCentralWidget(menu);
-	//window.show();
 	
     return a.exec();
 }

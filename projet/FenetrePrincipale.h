@@ -6,7 +6,9 @@
 #include "MenuFinPartie.h"
 #include "fenetrejeu.h"
 
-
+/*Fenêtre principale de l'application
+* C'est elle qui contient tous les widget
+* Et s'occupe de la transition entre ceux-ci*/
 class FenetrePrincipale : public QStackedWidget
 {
 	Q_OBJECT

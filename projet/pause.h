@@ -1,6 +1,9 @@
 #include <QtWidgets>
 #include "FenetrePrincipale.h"
 
+
+//Fenetre du menu de pause
+//Contient plusieurs boutons pour naviguer au menu désiré
 class Pause : public QWidget {
 	Q_OBJECT
 
