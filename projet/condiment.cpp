@@ -7,7 +7,7 @@
 
 
 
-Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsPixmapItem()
+Condiment::Condiment(bool isFalling, QGraphicsItem*parent):QObject(), QGraphicsPixmapItem(parent)
 {
 	setSorte(static_cast<SorteCondiment>(rand() % (POWERUP+1)));
 	//setSorte(Condiment::POWERUP);
@@ -160,6 +160,9 @@ string Condiment::toString() const
 			return "erreur";
 			break;
 	}
+	default:
+		return "Erreur";
+		break;
 	}
 }
 

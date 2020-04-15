@@ -48,7 +48,7 @@ QPixmap MenuFinPartie::setImage(QString chemin, int width, int height)
 }
 
 void MenuFinPartie::setPoint(int point) {
-
+	
 }
 
 void MenuFinPartie::setVictoire(bool victoire) {

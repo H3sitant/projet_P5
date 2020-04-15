@@ -34,3 +34,5 @@ projet/Makefile.Release
 .vs/
 
 *.cd
+
+projet/ui_fenetrejeu.h

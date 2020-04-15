@@ -9,9 +9,7 @@ Powerup::Powerup(SortePowerup sorte, Point position) : Condiment(SorteCondiment:
 Powerup::Powerup() : Condiment(SorteCondiment::POWERUP, { 0,0 }) {
 	setSortePow(static_cast <SortePowerup>(rand() % last));
 }
-Powerup::Powerup(SortePowerup sorte) : Condiment(SorteCondiment::POWERUP) {
-	setSortePow(sorte);
-}
+
 Powerup::SortePowerup Powerup::getSortePow() {
 	return sortePow;
 }

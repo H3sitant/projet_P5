@@ -28,8 +28,7 @@ FenetrePrincipale.h \
 		   instructions.h\
 		   MenuFinPartie.h
 		   
-		   
-FORMS += fenetrejeu.ui
+
 SOURCES += burger.cpp \
            condiment.cpp \
 		   FenetrePrincipale.cpp \
