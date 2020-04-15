@@ -37,6 +37,7 @@
       	<file alias="Petit_Covid.png">images/Petit_Covid.png</file>
       <file alias="Grosse_Licorne.png">images/Grosse_Licorne.png</file>
       <file alias="Grosse_Licorne_Triste.png">images/Grosse_Licorne_Triste.png</file>
+      <file alias="Fond_Menu_Titre.png">images/Fond_Menu_Titre.png</file>
     </qresource>
   <qresource prefix="/police">
     <file alias="pixelated.ttf">police/pixelated.ttf</file>

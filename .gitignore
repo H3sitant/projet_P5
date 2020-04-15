@@ -30,3 +30,7 @@ projet/Makefile.Debug
 projet/Makefile.Release
 
 *.zip
+
+.vs/
+
+*.cd

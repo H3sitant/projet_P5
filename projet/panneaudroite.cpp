@@ -24,7 +24,7 @@ PanneauDroite::PanneauDroite(QWidget*parent): QWidget(parent)
     boutonMenu->setStyleSheet("qproperty-alignment: AlignRight;");
 	connect(boutonMenu, &QPushButton::clicked, this, &PanneauDroite::slotBoutonMenu);
 
-    labelPowerup = new QLabel(tr("POWERUP ACTIF: \n AUCUN"),this);
+    labelPowerup = new QLabel(tr("POWERUP ACTIF\n AUCUN"),this);
 	labelImagePowerup = new QLabel();
 
 	progressBar = new QProgressBar(this);
@@ -32,14 +32,17 @@ PanneauDroite::PanneauDroite(QWidget*parent): QWidget(parent)
 	progressBar->setFormat("%v secondes");
 	
 	viderCase();
-    labelTempsPowerup = new QLabel(tr("TEMPS POWERUP:"),this);
+    labelTempsPowerup = new QLabel(tr("TEMPS POWERUP"),this);
 
 
     layoutPanneauDroite->addWidget(boutonMenu);
-	layoutPanneauDroite->addSpacing(75);
+	layoutPanneauDroite->addSpacing(160);
     layoutPanneauDroite->addWidget(labelPowerup);
+	layoutPanneauDroite->addSpacing(10);
 	layoutPanneauDroite->addWidget(labelImagePowerup);
+	layoutPanneauDroite->addSpacing(10);
     layoutPanneauDroite->addWidget(labelTempsPowerup);
+	layoutPanneauDroite->addSpacing(5);
 	layoutPanneauDroite->addWidget(progressBar);
     layoutPanneauDroite->addStretch();
 	labelImagePowerup->setAlignment(Qt::AlignCenter);
@@ -60,7 +63,7 @@ void PanneauDroite::slotBoutonMenu() {
 void PanneauDroite::setPowerupActif( Condiment* powerup) {
 	setTempsPowerup(10);
 	dessinerPowerup(powerup);
-	QString powerupActif("POWERUP ACTIF : \n");
+	QString powerupActif("POWERUP ACTIF\n");
 	ecrirePowerup(powerup->toString());
 }
 
@@ -74,7 +77,7 @@ void PanneauDroite::diminuerTempsPowerup()
 }
 
 void PanneauDroite::ecrirePowerup(string sorte) {
-	labelPowerup->setText(tr("POWERUP ACTIF: \n") + QString(sorte.c_str()));
+	labelPowerup->setText(tr("POWERUP ACTIF\n") + QString(sorte.c_str()));
 }
 
 void PanneauDroite::finPowerup() {

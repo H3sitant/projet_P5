@@ -13,8 +13,8 @@ public:
 
 private slots:
 	void actionJouer();
-	void actionInstruction();
-	void actionReglages();
+	void actionInstructions();
+	void actionQuitter();
 	
 private:
 	void createMenu();
@@ -22,9 +22,8 @@ private:
 	QPlainTextEdit *fenetreTexte;
 	FenetrePrincipale*parent;
 	QPushButton *jouer;
-
-	QPushButton *instructions ;
-	QPushButton *reglages ;
+	QPushButton *instructions;
+	QPushButton *quitter;
 };
 
 #endif // MENU_H

@@ -20,7 +20,7 @@ class PanneauCentral : public QGraphicsView
 public:
     PanneauCentral(Burger *commande, QWidget*parent = nullptr);
     const int LARGEUR = 500;
-    const int HAUTEUR = 500;
+    const int HAUTEUR = 720;
 	void finPowerups();
 	void verifierPowerups();
 	void activerRainbow();

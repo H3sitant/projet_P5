@@ -16,15 +16,23 @@ FenetrePrincipale::FenetrePrincipale(QWidget * parent): QStackedWidget(parent)
 	finPartie = new  MenuFinPartie(this);
 	connect(finPartie, &MenuFinPartie::boutonMenuClicked, this, &FenetrePrincipale::slotAfficherMenuPrincipal);
 	connect(finPartie, &MenuFinPartie::boutonRejouerClicked, this, &FenetrePrincipale::slotRejouer);
-	setFixedSize(1200, 600);
+	setFixedSize(1280, 720);
 	addWidget(jeu);
 	addWidget(menuPrincipal);
 	addWidget(menuPause);
 	addWidget(instructions);
 	addWidget(finPartie);
-	finPartie->setStyleSheet("background-color: rgba(0,0,0,0) ");
 	setCurrentWidget(menuPrincipal);
 
+	finPartie->setStyleSheet("background-color: rgba(0,0,0,0) ");
+
+	//Image de fond du menu principal
+	QPixmap bkgnd(":/images/Fond_Menu_Titre.png");
+	bkgnd = bkgnd.scaled(size(), Qt::IgnoreAspectRatio);
+	QPalette palette;
+	palette.setBrush(QPalette::Background, bkgnd);
+	menuPrincipal->setAutoFillBackground(true);
+	menuPrincipal->setPalette(palette);
 }
 
 void FenetrePrincipale::afficherJeu()

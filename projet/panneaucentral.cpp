@@ -53,7 +53,7 @@ void PanneauCentral::demarrerNouvellePartie() {
 	player->setPos(LARGEUR / 2, HAUTEUR - player->pixmap().height());
 
 	FallingCondiments.clear();
-	Condiment *base = new Condiment(Condiment::PAIN_B, { player->x(),500 - player->getHight() });
+	Condiment *base = new Condiment(Condiment::PAIN_B, { player->x(),720 - player->getHight() });
 	scene->addItem(base);
 	player->ajouterCondiment(base);
 	scene->addItem(player);
@@ -71,7 +71,7 @@ void PanneauCentral::resume() {
 void PanneauCentral::FC()
 {
 	Condiment *newFallingC = new Condiment(true);
-	newFallingC->setPos(rand() % LARGEUR-50, 0);
+	newFallingC->setPos(rand() % (LARGEUR-50)-50, 0);
 	//newFallingC->setPos(player->x(), 0);
 	FallingCondiments.push_back(newFallingC);
 	if (newFallingC->getSorte() == Condiment::POWERUP)
@@ -100,19 +100,19 @@ void PanneauCentral::CheckPosition()
 				c->setPosition(c->getPositionX(), c->getPositionY() + 10);
 				double itemSize = 0;
 				if (c->getSorte() == Condiment::PAIN_H)itemSize = 20;
-				if (c->getPositionY() > 500)
+				if (c->getPositionY() > 720)
 				{
 					FallingCondiments.remove(c);
 					delete c;
 				}
-				else if (c->getSorte() == Condiment::POWERUP && c->getPositionY() == 500 - player->getHight() - itemSize && c->getPositionX() > player->x() - 40 && c->getPositionX() < player->x() + 40)
+				else if (c->getSorte() == Condiment::POWERUP && c->getPositionY() == 720 - player->getHight() - itemSize && c->getPositionX() > player->x() - 40 && c->getPositionX() < player->x() + 40)
 				{
 					c->setFalling(false);
 					FallingCondiments.remove(c);
 					activerPower(c);
 					delete c;
 				}
-				else if (c->getPositionY() ==500-player->getHight()-itemSize && c->getPositionX() > player->x() - largeurCapter && c->getPositionX() < player->x() + largeurCapter)
+				else if (c->getPositionY() ==720-player->getHight()-itemSize && c->getPositionX() > player->x() - largeurCapter && c->getPositionX() < player->x() + largeurCapter)
 				{
 					c->setFalling(false);
 					FallingCondiments.remove(c);
@@ -197,21 +197,35 @@ void PanneauCentral::activerRainbow() {
 	
 	int i = 0;
 	bool pileIsGood = true;
-	Condiment::SorteCondiment condimentVoulu;
-	for (Condiment *c : player->getBurger()->getCondiments()) {
-		if (c->getSorte() != commande->getCondiments()[i]->getSorte()) {
-			pileIsGood = false;
+	if (player->getBurger()->getCondiments().size() <= commande->getCondiments().size())
+	{
+		Condiment::SorteCondiment condimentVoulu;
+		for (Condiment *c : player->getBurger()->getCondiments()) {
+			if (c->getSorte() != commande->getCondiments()[i]->getSorte()) {
+				pileIsGood = false;
+			}
+			i++;
 		}
-		i++;
-	}
-	//list<Condiment*> newFalling;
-	if (pileIsGood) {
-		condimentVoulu = commande->getCondiments()[i]->getSorte();
-		for (Condiment *c : FallingCondiments) {
-			c->setSorte(condimentVoulu);
+		//list<Condiment*> newFalling;
+		if (pileIsGood) {
+			condimentVoulu = commande->getCondiments()[i]->getSorte();
+			for (Condiment *c : FallingCondiments) {
+				c->setSorte(condimentVoulu);
+			}
 		}
-	}
-	else //On transforme les condiments en potion pour permettre au joueur de corriger ses erreurs
+		else //On transforme les condiments en potion pour permettre au joueur de corriger ses erreurs
+		{
+			for (Condiment* c : FallingCondiments) {
+				c->setSorte(Condiment::POWERUP);
+				//c->setScale(0.5);
+				c->setSortePow(Condiment::POTION);
+				//newC->setPos(c->pos());
+				//newFalling.push_back(newC);
+
+
+			}
+		}
+	}else
 	{
 		for (Condiment* c : FallingCondiments) {
 			c->setSorte(Condiment::POWERUP);

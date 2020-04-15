@@ -9,21 +9,33 @@ Pause::Pause(FenetrePrincipale  *parent)
 	: fenetreTexte(new QPlainTextEdit), QWidget(parent)
 {
 	this->parent = parent;
+
 	QVBoxLayout *layout = new QVBoxLayout();
+	layout->setAlignment(Qt::AlignCenter);
+
 	reprendreP = new QPushButton("Reprendre");
+	reprendreP->setFixedSize(400, 45);
+
 	instructionsP = new QPushButton("Instructions");
+	instructionsP->setFixedHeight(45);
+
 	rejouerP = new QPushButton("Rejouer");
-	quitterP = new QPushButton("Quitter");
-	this->setLayout(layout);
-	layout->addStretch();
+	rejouerP->setFixedHeight(45);
+
+	quitterP = new QPushButton("Menu principal");
+	quitterP->setFixedHeight(45);
+
+	layout->addSpacing(30);
 	layout->addWidget(reprendreP);
-	layout->addStretch();
+	layout->addSpacing(10);
 	layout->addWidget(instructionsP);
-	layout->addStretch();
+	layout->addSpacing(10);
 	layout->addWidget(rejouerP);
-	layout->addStretch();
+	layout->addSpacing(10);
 	layout->addWidget(quitterP);
-	layout->addStretch();
+
+	this->setLayout(layout);
+
 	createMenu();
 }
 
@@ -34,7 +46,7 @@ void Pause::reprendre() {
 }
 void Pause::instructions() {
 	parent->afficherInstructions();
-	printf("instrcutions");
+	printf("instructions");
 }
 void Pause::rejouer() {
 	parent->demarrerNouvellePartie();

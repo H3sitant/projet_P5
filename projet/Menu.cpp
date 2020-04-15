@@ -9,19 +9,28 @@ Menu::Menu(FenetrePrincipale * parent)
 	: QWidget(parent)
 {
 	this->parent = parent;
+	
 	QVBoxLayout *layout = new QVBoxLayout;
-	 jouer = new QPushButton("Jouer");
+	layout->setAlignment(Qt::AlignCenter);
 
-	 instructions = new QPushButton("Instructions");
-	 reglages = new QPushButton("Reglages");
-	this->setLayout(layout);
-	layout->addStretch();
+	jouer = new QPushButton("Jouer");
+	jouer->setFixedSize(400, 45);
+
+	instructions = new QPushButton("Instructions");
+	instructions->setFixedHeight(45);
+
+	quitter = new QPushButton("Quitter");
+	quitter->setFixedHeight(45);
+	
+	layout->addSpacing(200);
 	layout->addWidget(jouer);
-	layout->addSpacing(15);
+	layout->addSpacing(10);
 	layout->addWidget(instructions);
-	layout->addSpacing(15);
-	layout->addWidget(reglages);
-	layout->addStretch();
+	layout->addSpacing(10);
+	layout->addWidget(quitter);
+
+	this->setLayout(layout);
+
 	createMenu();
 }
 
@@ -30,16 +39,17 @@ void Menu::actionJouer() {
 	printf("jouer");
 	parent->demarrerNouvellePartie();
 }
-void Menu::actionInstruction() {
-	printf("instrcutions");
+void Menu::actionInstructions() {
+	printf("instructions");
 	parent->afficherInstructions();
 }
-void Menu::actionReglages() {
-	printf("reglages");
+void Menu::actionQuitter() {
+	printf("quitter");
+	parent->close();
 }
 
 void Menu::createMenu() {
 	connect(jouer, &QPushButton::clicked, this, &Menu::actionJouer);
-	connect(instructions, &QPushButton::clicked, this, &Menu::actionInstruction);
-	connect(reglages, &QPushButton::clicked, this, &Menu::actionReglages);
+	connect(instructions, &QPushButton::clicked, this, &Menu::actionInstructions);
+	connect(quitter, &QPushButton::clicked, this, &Menu::actionQuitter);
 }

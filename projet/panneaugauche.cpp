@@ -15,13 +15,14 @@ pointage->setText(tr("POINTS: 000"));
 QWidget* vies = new QWidget();
 QHBoxLayout *layoutVies = new QHBoxLayout();
 QPixmap imageCoeur (":/images/Coeur.png");
-int taille = 25;
+int taille = 50;
 QLabel *coeur1 = new QLabel();
 coeur1->setPixmap(imageCoeur.scaled(taille,taille,Qt::KeepAspectRatio));
 QLabel *coeur2 = new QLabel();
 coeur2->setPixmap(imageCoeur.scaled(taille,taille,Qt::KeepAspectRatio));
 QLabel *coeur3 = new QLabel();
 coeur3->setPixmap(imageCoeur.scaled(taille,taille,Qt::KeepAspectRatio));
+
 layoutVies->addStretch();
 layoutVies->addWidget(coeur1);
 layoutVies->addWidget(coeur2);
@@ -33,13 +34,14 @@ labelImageBurger = new QLabel();
 dessinerCommande();
 
 labelTemps = new QLabel();
-labelTemps->setText(tr("TEMPS RESTANT: 180"));
+labelTemps->setText(tr("TEMPS RESTANT\n180"));
 
-
+layoutPanneauGauche->addSpacing(5);
 layoutPanneauGauche->addWidget(pointage);
 layoutPanneauGauche->addWidget(vies);
-layoutPanneauGauche->addSpacing(75-taille);
+layoutPanneauGauche->addSpacing(100);
 layoutPanneauGauche->addWidget(labelTemps);
+layoutPanneauGauche->addSpacing(10);
 layoutPanneauGauche->addWidget(labelImageBurger);
 layoutPanneauGauche->addStretch();
 
@@ -57,14 +59,14 @@ void PanneauGauche::dessinerCommande() {
 
 void PanneauGauche::diminuerTemps()
 {
-	labelTemps->setText(QString("TEMPS RESTANT: ")+QString::number(--temps));
+	labelTemps->setText(QString("TEMPS RESTANT\n")+QString::number(--temps));
 	
 }
 
 void PanneauGauche::setTemps(int temps)
 {
 	this->temps = temps;
-	labelTemps->setText(QString("TEMPS RESTANT: ") + QString(--temps));
+	labelTemps->setText(QString("TEMPS RESTANT\n") + QString(--temps));
 }
 
 int PanneauGauche::getTemps()
