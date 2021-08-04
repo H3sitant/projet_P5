@@ -1,48 +1,43 @@
 # Skyburger
+![image](https://user-images.githubusercontent.com/44242537/128113669-295a21ba-0dd7-4160-a5e4-638efb570cfb.png)
 
-Le jeu Skyburger a été développé par un groupe d'étudiants 
-en génie électrique et génie informatique de l'Université de 
-Sherbrooke dans le cadre de leur deuxième session.
+Le jeu Skyburger a Ã©tÃ© dÃ©veloppÃ© en C++ Ã  l'aide de Qt par un groupe d'Ã©tudiants 
+en gÃ©nie Ã©lectrique et gÃ©nie informatique de l'UniversitÃ© de 
+Sherbrooke dans le cadre de leur projet de deuxiÃ¨me session.
 
 ## But du jeu
+![image](https://user-images.githubusercontent.com/44242537/128113978-a69a7070-0abe-48e4-a4f4-656d18fc140f.png)
 
-Le but du jeu est d'attraper les différents ingrédients afin de compléter la
-recette demandée.
+Le but du jeu est d'attraper les diffÃ©rents ingrÃ©dients afin de complÃ©ter la
+recette demandÃ©e.
 
 ## Condiments
-Il existe 5 condiments différents soit:
+Il existe 5 condiments diffÃ©rents soit:
 * Pain (P)
 * Boulette (B)
 * Laitue (L)
 * Tomate (T)
 * Oignon (O)
 
-Le pain possède la particularité de terminer la partie lorsqu'il est ramassé.
-Le burger constitué est alors comparée avec la recette demandée afin de savoir si
+Le pain possÃ¨de la particularitÃ© de terminer la partie lorsqu'il est ramassÃ©.
+Le burger constituÃ© est alors comparÃ©e avec la recette demandÃ©e afin de savoir si
 le joueur passe au niveau suivant ou s'il a perdu la partie.
 
 ## Powerups
-Il existe 4 "powerups" différents. Ces éléments tombent tout comme les condiments,
-mais possèdent des effets spéciaux.
+Il existe 4 "powerups" diffÃ©rents. Ces Ã©lÃ©ments tombent tout comme les condiments,
+mais possÃ¨dent des effets spÃ©ciaux.
 
 ### Potion Magique
-La potion magique (M) permet de retirer l'ingrédient au dessus du burger. Son effet est immédiat.
+La potion magique (M) permet de retirer l'ingrÃ©dient au dessus du burger. Son effet est immÃ©diat.
 
 ### Rainbow
-L'arc-en-ciel (R) transforme tous les ingrédients tombant en l'ingrédiant souhaité
-par le joueur pour compléter son hamburger.
+L'arc-en-ciel (R) transforme tous les ingrÃ©dients tombant en l'ingrÃ©diant souhaitÃ©
+par le joueur pour complÃ©ter son hamburger.
 
-### Étoile
-Implémentation à venir (S)
+### Ã‰toile
+ImplÃ©mentation Ã  venir (S)
 
 ### COVID-19
-Le COVID-19 (C) est le seul condiment nuisible. Celui-ci mélange tout le burger constitué
-par le joueur. De plus, les condiments tombant ont une certaine probabilité de se
+Le COVID-19 (C) est le seul condiment nuisible. Celui-ci mÃ©lange tout le burger constituÃ©
+par le joueur. De plus, les condiments tombant ont une certaine probabilitÃ© de se
 transformer en virus au cours de leur chute.
-
-## Comment jouer
-
-
-
-
-
